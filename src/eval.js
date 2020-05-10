@@ -16,7 +16,7 @@ export function parseDocumentNode (node) {
       return `[chapter:${text}]\n`
     }
     case 'paragraph': {
-      const results = []
+      const results = ['　']
       contents.flat().forEach(element => {
         const text = parseDocumentNode(element)
         results.push(text)
