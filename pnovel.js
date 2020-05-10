@@ -7,7 +7,7 @@ doc = block: block + {
   return { type: "doc", contents: block };
 }
 
-block = header / paragraph / blankline
+block = header / conversation / paragraph / blankline
 
 header = prefix: "#" + " " textline: textline {
   return { type: "header", contents: textline }

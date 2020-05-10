@@ -31,7 +31,7 @@ export function parseDocumentNode (node) {
         results.push(text)
       })
       const result = results.join('')
-      return result + '\n'
+      return '「' + result + '\n'
     }
     case 'chars':
       return contents

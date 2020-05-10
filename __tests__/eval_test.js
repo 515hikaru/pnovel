@@ -37,7 +37,7 @@ describe('parser', () => {
                 [
                     {
                         "type": "chars",
-                        "contents": "「離れて！」"
+                        "contents": "離れて！」"
                     }
                 ]
 
