@@ -1,3 +1,10 @@
 const parser = require('../dist/parser')
 
-console.log(parser.parse('12'))
+const doc =`foo
+bar
+
+boo
+`
+
+result = parser.parse(doc);
+console.log(result);
