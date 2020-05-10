@@ -1,5 +1,3 @@
-const parser = require('../parser/parser')
-
 export function parseDocumentNode (node) {
   const { type, contents } = node
   switch (type) {
@@ -41,29 +39,3 @@ export function parseDocumentNode (node) {
       return ''
   }
 }
-
-function main () {
-  const doc = `# はじめに
-
-春はあけぼの
-ようよう白くなりry
-
-枕草子をいきなり空で書くなんて無理だったわ。
-
-「会話文」
-
-「改行
-もできる？」
-
-文章でも改行をしたいときは
-
-
-と2行あけます。
-
-`
-  const result = parser.parse(doc)
-  console.log(parseDocumentNode(result))
-  console.log(JSON.stringify(result))
-}
-
-main()
