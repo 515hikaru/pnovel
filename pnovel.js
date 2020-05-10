@@ -10,7 +10,7 @@ doc = block:block+ {
 block = header / paragraph / blankline
 
 header = prefix:"#" + " " textline:textline {
-    return { type: "header", contents: "[chapter:" + textline[0].contents + "]" }
+    return { type: "header", contents: textline }
 }
 
 paragraph = textline:textline+blankline? {
