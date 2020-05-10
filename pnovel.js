@@ -3,26 +3,30 @@
  */
 start = doc
 
-doc = block:block+ {
-  return { type: "doc", contents: block};
+doc = block: block + {
+  return { type: "doc", contents: block };
 }
 
 block = header / paragraph / blankline
 
-header = prefix:"#" + " " textline:textline {
-    return { type: "header", contents: textline }
+header = prefix: "#" + " " textline: textline {
+  return { type: "header", contents: textline }
 }
 
-paragraph = textline:textline+blankline? {
-    return { type: "paragraph", contents: textline}
+paragraph = textline: textline + blankline ? {
+  return { type: "paragraph", contents: textline }
 }
 
-textline = inline:inline+ blankline? {
+conversation = prefix: "「" textline: textline + blankline ? {
+  return { type: "conversation", contents: textline }
+}
+
+textline = inline: inline + blankline ? {
   return inline;
 }
 
-inline = char:char+ {
-  return { type: "chars" , contents: char.join("") };
+inline = char: char + {
+  return { type: "chars", contents: char.join("") };
 }
 
 char = [^\n]
