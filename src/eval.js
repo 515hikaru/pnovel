@@ -46,6 +46,4 @@ function main () {
   console.log(JSON.stringify(result))
 }
 
-if (require.main === module) {
-  main()
-}
+main()
