@@ -30,23 +30,6 @@ describe('parser', () => {
         expect(received).toBe("　foobar\n")
     })
 
-    test('parse conversation paragraph', () => {
-        const obj = {
-            "type": "conversation",
-            "contents": [
-                [
-                    {
-                        "type": "chars",
-                        "contents": "「離れて！」"
-                    }
-                ]
-
-            ]
-        }
-        const received = parseDocumentNode(obj)
-        expect(received).toBe("「離れて！」\n")
-    })
-
     test('parse header', () => {
         const obj = { type: "header", "contents": [{type: "chars", contents: "foo" }]}
         expect(parseDocumentNode(obj)).toBe("[chapter:foo]\n")
