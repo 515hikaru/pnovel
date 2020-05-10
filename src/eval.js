@@ -16,7 +16,16 @@ export function parseDocumentNode (node) {
       return `[chapter:${text}]\n`
     }
     case 'paragraph': {
-      const results = ['　']
+      const results = []
+      contents.flat().forEach(element => {
+        const text = parseDocumentNode(element)
+        results.push(text)
+      })
+      const result = results.join('')
+      return '　' + result + '\n'
+    }
+    case 'conversation': {
+      const results = []
       contents.flat().forEach(element => {
         const text = parseDocumentNode(element)
         results.push(text)
@@ -40,6 +49,11 @@ function main () {
 ようよう白くなりry
 
 枕草子をいきなり空で書くなんて無理だったわ。
+
+「会話文」
+
+「改行
+もできる？」
 `
   const result = parser.parse(doc)
   console.log(parseDocumentNode(result))
