@@ -54,6 +54,12 @@ function main () {
 
 「改行
 もできる？」
+
+文章でも改行をしたいときは
+
+
+と2行あけます。
+
 `
   const result = parser.parse(doc)
   console.log(parseDocumentNode(result))
