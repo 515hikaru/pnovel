@@ -11,10 +11,10 @@
     "pegjs": "^0.10.0"
   },
   "scripts": {
-    "generate": "pegjs -o dist/parser.js pnovel.js",
+    "generate": "pegjs -o parser/parser.js pnovel.js",
     "lint": "eslint src/",
     "fix": "eslint --fix src/",
-    "start": "pegjs -o dist/parser.js pnovel.js && node src/eval.js",
+    "start": "pegjs -o parser/parser.js pnovel.js && node src/eval.js",
     "test": "jest",
     "build": "webpack --mode production src/eval.js"
   },

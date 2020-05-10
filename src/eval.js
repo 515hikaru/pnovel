@@ -1,4 +1,4 @@
-const parser = require('../dist/parser')
+const parser = require('../parser/parser')
 
 export function parseDocumentNode (node) {
   const { type, contents } = node
