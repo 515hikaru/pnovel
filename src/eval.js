@@ -33,19 +33,19 @@ export function parseDocumentNode (node) {
   }
 }
 
-function main() {
-    const doc = `# はじめに
+function main () {
+  const doc = `# はじめに
 
 春はあけぼの
 ようよう白くなりry
 
 枕草子をいきなり空で書くなんて無理だったわ。
 `
-    const result = parser.parse(doc)
-    console.log(parseDocumentNode(result))
-    console.log(JSON.stringify(result))
+  const result = parser.parse(doc)
+  console.log(parseDocumentNode(result))
+  console.log(JSON.stringify(result))
 }
 
-if(require.main === module) {
-    main()
+if (require.main === module) {
+  main()
 }

@@ -12,8 +12,8 @@
   },
   "scripts": {
     "generate": "pegjs -o dist/parser.js pnovel.js",
-    "lint": "eslint **/*.js",
-    "fix": "eslint --fix **/*.js",
+    "lint": "eslint src/",
+    "fix": "eslint --fix src/",
     "start": "pegjs -o dist/parser.js pnovel.js && node src/eval.js",
     "test": "jest"
   },
