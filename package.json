@@ -14,9 +14,9 @@
     "generate": "pegjs -o parser/parser.js pnovel.js",
     "lint": "eslint src/",
     "fix": "eslint --fix src/",
-    "start": "pegjs -o parser/parser.js pnovel.js && node src/eval.js",
+    "start": "node dist/main.js",
     "test": "jest",
-    "build": "webpack --mode production src/eval.js"
+    "build": "webpack --mode production src/main.js"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
