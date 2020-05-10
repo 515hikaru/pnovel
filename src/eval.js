@@ -24,13 +24,13 @@ function parseDocumentNode (node) {
       return `[chapter:${text}]\n`
     }
     case 'paragraph': {
-      const paragraphs = []
+      const results = []
       contents.flat().forEach(element => {
         const text = parseDocumentNode(element)
-        paragraphs.push(text)
+        results.push(text)
       })
-      const paragraph = paragraphs.join('')
-      return paragraph + '\n'
+      const result = results.join('')
+      return result + '\n'
     }
     case 'chars':
       return contents
