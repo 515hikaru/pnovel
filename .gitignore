@@ -252,3 +252,4 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/vim,node,linux,macos,emacs,windows
 
 dist/*
+parser/*
