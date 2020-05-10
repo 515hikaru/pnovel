@@ -1,3 +1,3 @@
-const parser = require('./dist/parser');
+const parser = require('../dist/parser');
 
 console.log(parser.parse('12'));

@@ -10,6 +10,7 @@
     "pegjs": "^0.10.0"
   },
   "scripts": {
-    "generate": "pegjs -o dist/parser.js pnovel.js"
+    "generate": "pegjs -o dist/parser.js pnovel.js",
+    "start": "node scripts/eval.js"
   }
 }
