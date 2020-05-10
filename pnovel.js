@@ -1,22 +1,31 @@
-// Simple Arithmetics Grammar
-// ==========================
-//
-// Accepts expressions like "2 * (3 + 4)" and computes their value.
+/*
+ * Definition of pnovel parser
+ */
+start = doc
 
-start
-  = additive
+doc = block:block+ {
+  return { type: "doc", contents: block};
+}
 
-additive
-  = left:multiplicative "+" right:additive { return left + right; }
-  / multiplicative
+block = header / paragraph / blankline
 
-multiplicative
-  = left:primary "*" right:multiplicative { return left * right; }
-  / primary
+header = prefix:"#" + " " textline:textline {
+    return { type: "header", contents: "[chapter:" + textline[0].contents + "]" }
+}
 
-primary
-  = integer
-  / "(" additive:additive ")" { return additive; }
+paragraph = textline:textline+blankline? {
+    return { type: "paragraph", contents: textline}
+}
 
-integer "integer"
-  = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+textline = inline:inline+ blankline? {
+  return inline;
+}
+
+inline = char:char+ {
+  return { type: "chars" , contents: char.join("") };
+}
+
+char = [^\n]
+blankline = [\n] {
+  return { type: "break" };
+}
