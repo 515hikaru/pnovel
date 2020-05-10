@@ -1,11 +1,11 @@
 const parser = require('../dist/parser')
 
-const doc = `# foo
+const doc = `# はじめに
 
-foo
-bar
+春はあけぼの
+ようよう白くなりry
 
-boo
+枕草子をいきなり空で書くなんて無理だったわ。
 `
 
 function parseDocumentNode (node) {
