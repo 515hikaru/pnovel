@@ -13,7 +13,7 @@
   "scripts": {
     "generate": "pegjs -o dist/parser.js pnovel.js",
     "lint": "eslint **/*.js",
-    "start": "node src/eval.js"
+    "start": "pegjs -o dist/parser.js pnovel.js && node src/eval.js"
   },
   "devDependencies": {
     "eslint": "^7.0.0",
