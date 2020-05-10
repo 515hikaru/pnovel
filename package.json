@@ -12,16 +12,22 @@
   },
   "scripts": {
     "generate": "pegjs -o dist/parser.js pnovel.js",
-    "lint": "eslint **/*.js",
-    "fix": "eslint --fix **/*.js",
-    "start": "pegjs -o dist/parser.js pnovel.js && node src/eval.js"
+    "lint": "eslint src/",
+    "fix": "eslint --fix src/",
+    "start": "pegjs -o dist/parser.js pnovel.js && node src/eval.js",
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.0.1"
   }
 }

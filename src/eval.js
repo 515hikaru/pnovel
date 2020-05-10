@@ -1,14 +1,6 @@
 const parser = require('../dist/parser')
 
-const doc = `# はじめに
-
-春はあけぼの
-ようよう白くなりry
-
-枕草子をいきなり空で書くなんて無理だったわ。
-`
-
-function parseDocumentNode (node) {
+export function parseDocumentNode (node) {
   const { type, contents } = node
   switch (type) {
     case 'doc': {
@@ -41,7 +33,19 @@ function parseDocumentNode (node) {
   }
 }
 
-const result = parser.parse(doc)
+function main () {
+  const doc = `# はじめに
 
-console.log(parseDocumentNode(result))
-console.log(JSON.stringify(result))
+春はあけぼの
+ようよう白くなりry
+
+枕草子をいきなり空で書くなんて無理だったわ。
+`
+  const result = parser.parse(doc)
+  console.log(parseDocumentNode(result))
+  console.log(JSON.stringify(result))
+}
+
+if (require.main === module) {
+  main()
+}
