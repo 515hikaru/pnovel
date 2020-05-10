@@ -5,6 +5,7 @@
   "main": "scripts/eval.js",
   "repository": "ssh://git@github.com/515hikaru/pnovel.git",
   "author": "515hikaru <12kojima.takahiro@gmail.com>",
+  "private": true,
   "license": "MIT",
   "dependencies": {
     "pegjs": "^0.10.0"
