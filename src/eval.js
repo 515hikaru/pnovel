@@ -11,15 +11,15 @@ export function parseDocumentNode (node) {
     }
     case 'header': {
       const text = contents
-      return `[chapter:${text}]\n`
+      return `[chapter:${text}]`
     }
     case 'sentence': {
       const text = contents
-      return '　' + text + '\n'
+      return '　' + text
     }
     case 'speaking': {
       const text = contents
-      return text + '\n'
+      return text
     }
     case 'break':
       return '\n'

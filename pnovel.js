@@ -15,7 +15,7 @@ doc = block: block + {
   return { type: "doc", contents: block };
 }
 
-block =  header / sentence / speaking / breakline
+block =  emptyline / header / sentence / speaking / breakline
 
 header = prefix:"#" whitespaces line:(char+ blankline) {
   const str = makeLine(line)
@@ -33,6 +33,10 @@ sentence = whitespaces line:(!startToken char+ !endToken blankline)+ {
 }
 
 breakline = (whitespaces blankline)+ {
+  return {type: "break"}
+}
+
+emptyline = whitespaces "[newline]" whitespaces breakline {
   return {type: "break"}
 }
 
