@@ -11,6 +11,18 @@ def
 
 　　boo
 # foo
+
+「あああ」
+
+「ああああ
+あああ」
+
+
+
+        
+
+    
+（心の声）
 `
     const expected = {
       type: 'doc',
@@ -22,6 +34,12 @@ def
             { type: 'header', contents: 'foo'},
             { type: 'break'},
             { type: 'sentence', contents: 'boo# foo'},
+            { type: 'break' },
+            { type: 'speaking', contents: '「あああ」' },
+            { type: 'break' },
+            { type: 'speaking', contents: '「あああああああ」'},
+            { type: 'break' },
+            { type: 'speaking', contents: '（心の声）'},
           ],
     }
     expect(parse(input)).toStrictEqual(expected)

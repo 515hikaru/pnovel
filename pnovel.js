@@ -15,24 +15,31 @@ doc = block: block + {
   return { type: "doc", contents: block };
 }
 
-block =  header / sentence / breakline
+block =  header / sentence / speaking / breakline
 
 header = prefix:"#" whitespaces line:(char+ blankline) {
   const str = makeLine(line)
   return {type: "header", contents: str}
 }
 
-sentence = whitespaces line:(char+ blankline)+ {
+speaking = whitespaces line:(["「（"]? char+ ["）」"]? blankline)+ {
+  const str = makeLine(line)
+  return {type: "speaking", contents: str}
+}
+
+sentence = whitespaces line:(!startToken char+ !endToken blankline)+ {
   const str = makeLine(line)
   return { type: "sentence", contents: str }
 }
 
-breakline = whitespaces blankline {
+breakline = (whitespaces blankline)+ {
   return {type: "break"}
 }
 
 char = [^\n]
 blankline = [\n]
-// special = [「」（）()#]
+startToken = ["「（"]
+endToken = ["」）"]
+
 whitespace "whitespace" = [ 　\t\r]
 whitespaces "whitespaces" = whitespace*
