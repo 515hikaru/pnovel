@@ -15,40 +15,24 @@ doc = block: block + {
   return { type: "doc", contents: block };
 }
 
-block = header / paragraph / blankline / whitespace
+block =  header / sentence / breakline
 
-/*
-header = prefix: "#" + " " textline: textline {
-  return { type: "header", contents: textline }
-}
-
-
-conversation = prefix: "「" textline: textline + blankline ?{
-  return { type: "conversation", contents: textline }
-}
-
-internal = prefix: "（" textline: textline + blankline ?{
-  return { type: "internal", contents: textline }
-}
-
-textline = inline: inline + blankline ? {
-  return inline;
-}
-*/
-
-header = prefix:"#" whitespaces line:(char+ blankline)+ blankline? {
+header = prefix:"#" whitespaces line:(char+ blankline) {
   const str = makeLine(line)
   return {type: "header", contents: str}
 }
 
-paragraph = whitespaces line:(char+ blankline)+ blankline?{
+sentence = whitespaces line:(char+ blankline)+ {
   const str = makeLine(line)
-  return { type: "paragraph", contents: str };
+  return { type: "sentence", contents: str }
+}
+
+breakline = whitespaces blankline {
+  return {type: "break"}
 }
 
 char = [^\n]
-
 blankline = [\n]
 // special = [「」（）()#]
-whitespace "whitespace" = [ 　\t\r\n]
+whitespace "whitespace" = [ 　\t\r]
 whitespaces "whitespaces" = whitespace*

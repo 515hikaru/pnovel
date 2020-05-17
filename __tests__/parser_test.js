@@ -15,10 +15,13 @@ def
     const expected = {
       type: 'doc',
       contents: [
-            { type: 'paragraph', contents: 'abcdef'},
-            { type: 'paragraph', contents: 'foo'},
+            { type: 'sentence', contents: 'abcdef'},
+            { type: 'break'},
+            { type: 'sentence', contents: 'foo'},
+            { type: 'break'},
             { type: 'header', contents: 'foo'},
-            { type: 'paragraph', contents: 'boo# foo'},
+            { type: 'break'},
+            { type: 'sentence', contents: 'boo# foo'},
           ],
     }
     expect(parse(input)).toStrictEqual(expected)
