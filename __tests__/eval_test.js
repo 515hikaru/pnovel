@@ -5,7 +5,7 @@ import { TestScheduler } from 'jest'
 describe('parser', () => {
   test('parse paragraph node', () => {
     const obj = { type: 'sentence', contents: 'foo' }
-    expect(parseDocumentNode(obj)).toBe('　foo\n')
+    expect(parseDocumentNode(obj)).toBe('　foo')
   })
 
   test('parse speaking', () => {
@@ -14,11 +14,11 @@ describe('parser', () => {
       contents: '「あああ」'
     }
     const received = parseDocumentNode(obj)
-    expect(received).toBe('「あああ」\n')
+    expect(received).toBe('「あああ」')
   })
 
   test('parse header', () => {
     const obj = { type: 'header', contents: 'foo' }
-    expect(parseDocumentNode(obj)).toBe('[chapter:foo]\n')
+    expect(parseDocumentNode(obj)).toBe('[chapter:foo]')
   })
 })
