@@ -17,8 +17,12 @@ paragraph = textline: textline + blankline ? {
   return { type: "paragraph", contents: textline }
 }
 
-conversation = prefix: "「" textline: textline + blankline ? {
+conversation = prefix: "「" textline: textline + blankline ?{
   return { type: "conversation", contents: textline }
+}
+
+internal = prefix: "（" textline: textline + blankline ?{
+  return { type: "internal", contents: textline }
 }
 
 textline = inline: inline + blankline ? {
