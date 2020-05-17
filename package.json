@@ -10,13 +10,16 @@
   "dependencies": {
     "pegjs": "^0.10.0"
   },
+  "bin": {
+    "pnovel": "./bin/pnovel.js"
+  },
   "scripts": {
     "generate": "pegjs -o parser/parser.js pnovel.js",
     "lint": "eslint src/",
     "fix": "eslint --fix src/",
     "start": "node dist/main.js",
     "test": "jest",
-    "build": "webpack --mode production src/main.js"
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
