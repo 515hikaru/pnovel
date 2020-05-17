@@ -11,7 +11,7 @@ RUN yarn && \
     yarn run generate && \
     yarn run build
 
-FROM node:12.16.3-stretch
+FROM node:12.16.3-alpine3.11
 RUN mkdir -p /app/dist
 RUN mkdir -p /app/bin
 COPY --from=node /app/dist/main.js /app/dist/main.js
