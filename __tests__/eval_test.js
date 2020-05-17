@@ -4,7 +4,7 @@ import { TestScheduler } from 'jest'
 
 describe('parser', () => {
   test('parse paragraph node', () => {
-    const obj = { type: 'paragraph', contents: 'foo' }
+    const obj = { type: 'sentence', contents: 'foo' }
     expect(parseDocumentNode(obj)).toBe('　foo\n')
   })
 
