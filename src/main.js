@@ -16,8 +16,7 @@ function main () {
 
 文章でも改行をしたいときは
 
-
-と2行あけます。
+と1行あけます。
 `
   const result = parse(doc)
   console.log(parseDocumentNode(result))

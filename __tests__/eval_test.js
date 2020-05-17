@@ -3,52 +3,22 @@ import { TestScheduler } from 'jest'
 // import { TestScheduler } from 'jest';
 
 describe('parser', () => {
-  test('parse chars node', () => {
-    const obj = { type: 'chars', contents: 'foo' }
-    expect(parseDocumentNode(obj)).toBe('foo')
+  test('parse paragraph node', () => {
+    const obj = { type: 'sentence', contents: 'foo' }
+    expect(parseDocumentNode(obj)).toBe('　foo\n')
   })
 
-  test('parse paragraph', () => {
+  test('parse speaking', () => {
     const obj = {
-      type: 'paragraph',
-      contents: [
-        [
-          {
-            type: 'chars',
-            contents: 'foo'
-          }
-        ],
-        [
-          {
-            type: 'chars',
-            contents: 'bar'
-          }
-        ]
-      ]
+      type: 'speaking',
+      contents: '「あああ」'
     }
     const received = parseDocumentNode(obj)
-    expect(received).toBe('　foobar\n')
-  })
-
-  test('parse conversation paragraph', () => {
-    const obj = {
-      type: 'conversation',
-      contents: [
-        [
-          {
-            type: 'chars',
-            contents: '離れて！」'
-          }
-        ]
-
-      ]
-    }
-    const received = parseDocumentNode(obj)
-    expect(received).toBe('「離れて！」\n')
+    expect(received).toBe('「あああ」\n')
   })
 
   test('parse header', () => {
-    const obj = { type: 'header', contents: [{ type: 'chars', contents: 'foo' }] }
+    const obj = { type: 'header', contents: 'foo' }
     expect(parseDocumentNode(obj)).toBe('[chapter:foo]\n')
   })
 })
