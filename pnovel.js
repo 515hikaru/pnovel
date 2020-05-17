@@ -1,39 +1,38 @@
 /*
  * Definition of pnovel parser
  */
+
+{
+  function makeLine(l) {
+    const chars = l.flat(2)
+    return chars.join("").trim().replace(/(\r\n|\n|\r)/gm, "")
+  }
+}
+
 start = doc
 
 doc = block: block + {
   return { type: "doc", contents: block };
 }
 
-block = header / conversation / paragraph / blankline
+block =  header / sentence / breakline
 
-header = prefix: "#" + " " textline: textline {
-  return { type: "header", contents: textline }
+header = prefix:"#" whitespaces line:(char+ blankline) {
+  const str = makeLine(line)
+  return {type: "header", contents: str}
 }
 
-paragraph = textline: textline + blankline ? {
-  return { type: "paragraph", contents: textline }
+sentence = whitespaces line:(char+ blankline)+ {
+  const str = makeLine(line)
+  return { type: "sentence", contents: str }
 }
 
-conversation = prefix: "「" textline: textline + blankline ?{
-  return { type: "conversation", contents: textline }
-}
-
-internal = prefix: "（" textline: textline + blankline ?{
-  return { type: "internal", contents: textline }
-}
-
-textline = inline: inline + blankline ? {
-  return inline;
-}
-
-inline = char: char + {
-  return { type: "chars", contents: char.join("") };
+breakline = whitespaces blankline {
+  return {type: "break"}
 }
 
 char = [^\n]
-blankline = [\n] {
-  return { type: "break" };
-}
+blankline = [\n]
+// special = [「」（）()#]
+whitespace "whitespace" = [ 　\t\r]
+whitespaces "whitespaces" = whitespace*
