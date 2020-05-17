@@ -1,26 +1,39 @@
+import * as fs from 'fs'
+import * as path from 'path'
+
+import { Command } from 'commander'
+
 import { parse } from '../parser/parser'
 import { parseDocumentNode } from './eval'
 
-function main () {
-  const doc = `# はじめに
+const program = new Command()
 
-春はあけぼの
-ようよう白くなりry
+const readFile = (file) => {
+  const filePath = path.resolve(file)
+  return fs.readFileSync(filePath, 'utf-8')
+}
 
-枕草子をいきなり空で書くなんて無理だったわ。
+const main = () => {
+  // validate arguments
+  program.parse(process.argv)
+  if (program.args.length === 0) {
+    console.log('pnovel needs a file path.')
+    console.log('$ pnovel <file path>')
+    return
+  }
 
-「会話文」
-
-「改行
-もできる？」
-
-文章でも改行をしたいときは
-
-と1行あけます。
-`
-  const result = parse(doc)
-  console.log(parseDocumentNode(result))
-  console.log(JSON.stringify(result))
+  // look up the file path
+  const file = program.args[0]
+  try {
+    fs.statSync(path.resolve(file))
+  } catch {
+    console.log(`no such a file: ${file}`)
+    return
+  }
+  const fileContent = readFile(file)
+  const parsedJSON = parse(fileContent)
+  const evals = parseDocumentNode(parsedJSON)
+  console.log(evals)
 }
 
 main()
