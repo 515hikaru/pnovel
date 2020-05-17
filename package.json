@@ -8,6 +8,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "commander": "^5.1.0",
     "pegjs": "^0.10.0"
   },
   "bin": {
