@@ -1,6 +1,6 @@
 {
   "name": "@515hikaru/pnovel",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "Light weight markup language for Pixiv novels",
   "main": "src/eval.js",
   "repository": "ssh://git@github.com/515hikaru/pnovel.git",
