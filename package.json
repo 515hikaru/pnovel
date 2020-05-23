@@ -9,13 +9,16 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^5.1.0",
-    "pegjs": "^0.10.0"
+    "pegjs": "^0.10.0",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.3"
   },
   "bin": {
     "pnovel": "./bin/pnovel.js"
   },
   "scripts": {
     "generate": "pegjs -o parser/parser.js pnovel.js",
+    "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src/",
     "fix": "eslint --fix src/",
     "start": "node dist/main.js",
