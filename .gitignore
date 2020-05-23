@@ -253,4 +253,5 @@ $RECYCLE.BIN/
 
 dist/*
 parser/*
-main*
+/main*
+/src/*.js
