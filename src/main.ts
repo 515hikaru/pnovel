@@ -3,12 +3,13 @@ import * as path from 'path'
 
 import { Command } from 'commander'
 
+// @ts-ignore
 import { parse } from '../parser/parser'
-import { parseDocumentNode } from './eval'
+import { parseEntireDocument } from './eval'
 
 const program = new Command()
 
-const readFile = (file) => {
+const readFile = (file: string) => {
   const filePath = path.resolve(file)
   return fs.readFileSync(filePath, 'utf-8')
 }
@@ -32,7 +33,7 @@ const main = () => {
   }
   const fileContent = readFile(file)
   const parsedJSON = parse(fileContent)
-  const evals = parseDocumentNode(parsedJSON)
+  const evals = parseEntireDocument(parsedJSON)
   console.log(evals)
 }
 
