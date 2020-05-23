@@ -1,4 +1,4 @@
-![Build](https://github.com/515hikaru/pnovel/workflows/Node.js%20CI/badge.svg)
+![Build](https://github.com/515hikaru/pnovel/workflows/Build/badge.svg)
 
 [![dockeri.co](https://dockeri.co/image/515hikaru/pnovel)](https://hub.docker.com/r/515hikaru/pnovel)
 
