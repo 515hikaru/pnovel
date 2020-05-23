@@ -4,6 +4,7 @@ module.exports = {
     commonjs: true,
     es6: true
   },
+  parser: "@typescript-eslint/parser",
   extends: [
     'standard'
   ],

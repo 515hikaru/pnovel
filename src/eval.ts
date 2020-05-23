@@ -8,7 +8,7 @@ interface EntireDocument {
   contents: DocumentBlock[]
 }
 
-export function parseDocumentBlock(node: DocumentBlock): string {
+export function parseDocumentBlock (node: DocumentBlock): string {
   const { type, contents } = node
   switch (type) {
     case 'header': {

@@ -3,7 +3,7 @@ import * as path from 'path'
 
 import { Command } from 'commander'
 
-//@ts-ignore
+// @ts-ignore
 import { parse } from '../parser/parser'
 import { parseEntireDocument } from './eval'
 
