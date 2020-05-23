@@ -1,9 +1,11 @@
-![Node.js CI](https://github.com/515hikaru/pnovel/workflows/Node.js%20CI/badge.svg)
+![Build](https://github.com/515hikaru/pnovel/workflows/Node.js%20CI/badge.svg)
+
+[![dockeri.co](https://dockeri.co/image/515hikaru/pnovel)](https://hub.docker.com/r/515hikaru/pnovel)
 
 **WIP**: 開発中です。
 
 # pnovel
-Pixiv小説用簡易マークアップ&amp;変換
+Pixiv小説用ツール
 
 # 実行例
 
