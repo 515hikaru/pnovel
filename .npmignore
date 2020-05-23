@@ -1,2 +1,2 @@
-!dist/.gitkeep
-!parser/.gitkeep
+!dist/main.js
+!parser/parser.js
