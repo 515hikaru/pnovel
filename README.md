@@ -7,7 +7,23 @@
 # pnovel
 Pixiv小説用ツール
 
-# 実行例
+# How To Install
+
+## NPM
+
+```
+# @515hikaru のパッケージをインストールするときだけ GitHub のレジストリを利用するように設定
+npm config set @515hikaru:registry https://npm.pkg.github.com/515hikaru
+npm install @515hikaru/pnovel
+```
+
+## Docker
+
+```
+docker pull 515hikaru/pnovel:0.3.9
+```
+
+利用例としては下記:
 
 ```
 docker run --rm -v $(pwd):/work 515hikaru/pnovel:0.3.2 pnovel /work/main.pnovel > main.txt
