@@ -21,7 +21,7 @@ def
 
         
 
-    
+% コメント
 （心の声）
 `
     const expected = {
@@ -39,6 +39,7 @@ def
             { type: 'break' },
             { type: 'speaking', contents: '「あああああああ」'},
             { type: 'break' },
+            { type: 'comment', contents: 'コメント'},
             { type: 'speaking', contents: '（心の声）'},
           ],
     }
