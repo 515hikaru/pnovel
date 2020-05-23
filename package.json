@@ -8,6 +8,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
     "commander": "^5.1.0",
     "pegjs": "^0.10.0",
     "ts-loader": "^7.0.4",
@@ -19,8 +20,8 @@
   "scripts": {
     "generate": "pegjs -o parser/parser.js pnovel.js",
     "typecheck": "tsc -p . --noEmit",
-    "lint": "eslint src/",
-    "fix": "eslint --fix src/",
+    "lint": "eslint src/*.ts",
+    "fix": "eslint --fix src/*.ts",
     "start": "node dist/main.js",
     "test": "jest",
     "build": "webpack"
