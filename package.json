@@ -22,7 +22,7 @@
   },
   "scripts": {
     "generate": "pegjs -o parser/parser.js pnovel.js",
-    "prepack": "pegjs -o parser/parser.js pnovel.js",
+    "postinstall": "pegjs -o parser/parser.js pnovel.js && webpack",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src/*.ts",
     "fix": "eslint --fix src/*.ts",
