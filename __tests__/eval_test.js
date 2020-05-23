@@ -1,4 +1,4 @@
-import { parseDocumentBlock } from '../src/eval'
+import { parseDocumentBlock, parseEntireDocument } from '../src/eval'
 import { TestScheduler } from 'jest'
 // import { TestScheduler } from 'jest';
 
@@ -20,5 +20,19 @@ describe('parser', () => {
   test('parse header', () => {
     const obj = { type: 'header', contents: 'foo' }
     expect(parseDocumentBlock(obj)).toBe('[chapter:foo]')
+  })
+
+  test('comment parser', () => {
+    const obj = {type: 'cooment', contents: 'コメント'}
+    expect(parseDocumentBlock(obj)).toBe('')
+  })
+
+  test('parse entire document', () => {
+    const obj = {type: 'doc', contents: [
+      { type: 'header', contents: 'foo' },
+      { type: 'break', contents: ''},
+      { type: 'sentence', contents: 'foo'},
+    ]}
+    expect(parseEntireDocument(obj)).toBe('[chapter:foo]\n　foo')
   })
 })
