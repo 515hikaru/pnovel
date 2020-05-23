@@ -17,11 +17,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: npm ci
     - name: Testing
       run: |
-        yarn run generate
-        yarn run test
+        npm run generate
+        npm run test
 
   typecheck:
     runs-on: ubuntu-latest
@@ -35,9 +35,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: npm ci
     - name: TypeCheck
-      run: yarn run typecheck
+      run: npm run typecheck
 
   lint:
     runs-on: ubuntu-latest
@@ -51,9 +51,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: npm ci
     - name: Linting
-      run: yarn run lint
+      run: npm run lint
 
   build:
     runs-on: ubuntu-latest
@@ -67,8 +67,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: npm ci
     - name: Building
       run: |
-        yarn run generate
-        yarn run build
+        npm run generate
+        npm run build

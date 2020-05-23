@@ -6,9 +6,9 @@ WORKDIR /app
 
 COPY . /app
 
-RUN yarn && \
-    yarn run generate && \
-    yarn run build
+RUN npm ci && \
+    npm run generate && \
+    npm run build
 
 FROM node:12.16.3-alpine3.11
 ENV VERSION 0.3.2
