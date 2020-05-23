@@ -20,6 +20,7 @@
   },
   "scripts": {
     "generate": "pegjs -o parser/parser.js pnovel.js",
+    "prepublish": "pegjs -o parser/parser.js pnovel.js",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src/*.ts",
     "fix": "eslint --fix src/*.ts",
