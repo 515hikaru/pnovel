@@ -12,12 +12,13 @@ def
 　　boo
 # foo
 
-「あああ」
+「あああ!」
 
-「ああああ
+「ああああ?
 あああ」
 
-
+「あああ？
+」
 
         
 
@@ -27,17 +28,19 @@ def
     const expected = {
       type: 'doc',
       contents: [
-            { type: 'sentence', contents: 'abcdef'},
+            { type: 'sentence', contents: 'ａｂｃｄｅｆ'},
             { type: 'break'},
-            { type: 'sentence', contents: 'foo'},
+            { type: 'sentence', contents: 'ｆｏｏ'},
             { type: 'break'},
-            { type: 'header', contents: 'foo'},
+            { type: 'header', contents: 'ｆｏｏ'},
             { type: 'break'},
-            { type: 'sentence', contents: 'boo# foo'},
+            { type: 'sentence', contents: 'ｂｏｏ# ｆｏｏ'},
             { type: 'break' },
-            { type: 'speaking', contents: '「あああ」' },
+            { type: 'speaking', contents: '「あああ！」' },
             { type: 'break' },
-            { type: 'speaking', contents: '「あああああああ」'},
+            { type: 'speaking', contents: '「ああああ？　あああ」'},
+            { type: 'break'},
+            { type: 'speaking', contents: '「あああ？」'},
             { type: 'break' },
             { type: 'comment', contents: 'コメント'},
             { type: 'speaking', contents: '（心の声）'},
