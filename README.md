@@ -20,7 +20,7 @@ npm install @515hikaru/pnovel
 ## Docker
 
 ```
-docker pull 515hikaru/pnovel:0.3.9
+docker pull 515hikaru/pnovel:0.4.1
 ```
 
 利用例としては下記:
