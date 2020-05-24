@@ -7,6 +7,11 @@
     const chars = l.flat(2)
     return chars.join("").trim().replace(/(\r\n|\n|\r)/gm, "")
   }
+
+  function isSymbol(char) {
+    const symbols = ['!', '?', '！', '？']
+    return symbols.includes(char)
+  }
 }
 
 start = doc
@@ -44,13 +49,22 @@ comment = whitespaces "%" comment:char+ breakline {
   return {type: "comment", contents: comment.join("").trim()}
 }
 
-char = wideToken / [^\n]
+char = exceptZenkakuSpaceToekn / wideToken / [^\n]
 blankline = [\n]
 startToken = ["「（"]
 endToken = ["」）"]
 
 wideToken = char:[0-9a-zA-Z!?] {
-  return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
+  if (!isSymbol(char)) {
+    return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
+  }
+  return String.fromCharCode(char.charCodeAt(0) + 0xFEE0) + '　'
+}
+exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? "」" {
+  if (['!', '?'].includes(char)) {
+    char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
+  }
+  return char + "」"
 }
 
 whitespace "whitespace" = [ 　\t\r]

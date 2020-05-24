@@ -17,7 +17,8 @@ def
 「ああああ?
 あああ」
 
-
+「あああ？
+」
 
         
 
@@ -37,7 +38,9 @@ def
             { type: 'break' },
             { type: 'speaking', contents: '「あああ！」' },
             { type: 'break' },
-            { type: 'speaking', contents: '「ああああ？あああ」'},
+            { type: 'speaking', contents: '「ああああ？　あああ」'},
+            { type: 'break'},
+            { type: 'speaking', contents: '「あああ？」'},
             { type: 'break' },
             { type: 'comment', contents: 'コメント'},
             { type: 'speaking', contents: '（心の声）'},
