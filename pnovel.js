@@ -44,10 +44,14 @@ comment = whitespaces "%" comment:char+ breakline {
   return {type: "comment", contents: comment.join("").trim()}
 }
 
-char = [^\n]
+char = wideToken / [^\n]
 blankline = [\n]
 startToken = ["「（"]
 endToken = ["」）"]
+
+wideToken = char:[0-9a-zA-Z!?] {
+  return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
+}
 
 whitespace "whitespace" = [ 　\t\r]
 whitespaces "whitespaces" = whitespace*
