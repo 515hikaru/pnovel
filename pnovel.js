@@ -54,11 +54,14 @@ blankline = [\n]
 startToken = ["「（"]
 endToken = ["」）"]
 
-wideToken = char:[0-9a-zA-Z!?] {
+wideToken = char:[0-9a-zA-Z!?！？] whitespaces {
   if (!isSymbol(char)) {
     return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
   }
-  return String.fromCharCode(char.charCodeAt(0) + 0xFEE0) + '　'
+  if (['!', '?'].includes(char)) {
+    char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0)
+  }
+  return  char + '　'
 }
 exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? "」" {
   if (['!', '?'].includes(char)) {

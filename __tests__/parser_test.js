@@ -22,6 +22,8 @@ def
 
         
 
+「あっ！　田中さん!」
+
 % コメント
 （心の声）
 `
@@ -41,6 +43,8 @@ def
             { type: 'speaking', contents: '「ああああ？　あああ」'},
             { type: 'break'},
             { type: 'speaking', contents: '「あああ？」'},
+            { type: 'break' },
+            { type: 'speaking', contents: '「あっ！　田中さん！」' },
             { type: 'break' },
             { type: 'comment', contents: 'コメント'},
             { type: 'speaking', contents: '（心の声）'},
