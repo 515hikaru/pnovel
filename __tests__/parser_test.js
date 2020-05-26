@@ -18,14 +18,19 @@ def
 あああ」
 
 「あああ？
-」
+　 」
 
         
 
 「あっ！　田中さん!」
 
+
 % コメント
 （心の声）
+
+（心！の声！）
+
+（心？の声？）
 `
     const expected = {
       type: 'doc',
@@ -48,6 +53,10 @@ def
             { type: 'break' },
             { type: 'comment', contents: 'コメント'},
             { type: 'speaking', contents: '（心の声）'},
+            { type: 'break' },
+            { type: 'speaking', contents: '（心！　の声！）' },
+            { type: 'break' },
+            { type: 'speaking', contents: '（心？　の声？）' },
           ],
     }
     expect(parse(input)).toStrictEqual(expected)
