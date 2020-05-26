@@ -17,7 +17,7 @@ const readFile = (file: string) => {
 const main = () => {
   // validate arguments
   program
-    .version('v0.4.4')
+    .version('v0.4.5-dev')
     .parse(process.argv)
   if (program.args.length === 0) {
     console.log('pnovel needs a file path.')
