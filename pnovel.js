@@ -63,11 +63,11 @@ wideToken = char:[0-9a-zA-Z!?！？] whitespaces {
   }
   return  char + '　'
 }
-exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? "」" {
+exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? whitespaces suffix:endToken {
   if (['!', '?'].includes(char)) {
     char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
   }
-  return char + "」"
+  return char + suffix[0]
 }
 
 whitespace "whitespace" = [ 　\t\r]
