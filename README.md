@@ -12,7 +12,7 @@ Pixiv小説用ツール
 ## NPM
 
 ```
-npx @515hikaru/pnovel main.pnovel
+npx pnovel main.pnovel
 ```
 
 ## Docker
