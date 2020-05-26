@@ -1,5 +1,5 @@
 {
-  "name": "@515hikaru/pnovel",
+  "name": "pnovel",
   "version": "0.4.2",
   "description": "Light weight markup language for Pixiv novels",
   "main": "src/eval.js",
