@@ -61,4 +61,17 @@ def
     }
     expect(parse(input)).toStrictEqual(expected)
   })
+
+  test('eof is not empty', () => {
+    const input = `abc
+def`
+    const expected = {
+      type: 'doc',
+      contents: [
+            { type: 'sentence', contents: 'ａｂｃｄｅｆ'},
+          ],
+    }
+    expect(parse(input)).toStrictEqual(expected)
+  })
+
 })

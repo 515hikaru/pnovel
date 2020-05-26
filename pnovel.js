@@ -32,7 +32,7 @@ speaking = whitespaces line:(startToken? char+ endToken? blankline)+ {
   return {type: "speaking", contents: str}
 }
 
-sentence = whitespaces line:(!startToken char+ !endToken blankline)+ {
+sentence = whitespaces line:(!startToken char+ !endToken blankline)+ !.?{
   const str = makeLine(line)
   return { type: "sentence", contents: str }
 }
@@ -50,9 +50,6 @@ comment = whitespaces "%" comment:char+ breakline {
 }
 
 char = exceptZenkakuSpaceToekn / wideToken / [^\n]
-blankline = [\n]
-startToken = ["「（"]
-endToken = ["」）"]
 
 wideToken = char:[0-9a-zA-Z!?！？] whitespaces {
   if (!isSymbol(char)) {
@@ -63,6 +60,7 @@ wideToken = char:[0-9a-zA-Z!?！？] whitespaces {
   }
   return  char + '　'
 }
+
 exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? whitespaces suffix:endToken {
   if (['!', '?'].includes(char)) {
     char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
@@ -70,5 +68,8 @@ exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? whitespaces suf
   return char + suffix[0]
 }
 
+blankline = [!.\n]
+startToken = ["「（"]
+endToken = ["」）"]
 whitespace "whitespace" = [ 　\t\r]
 whitespaces "whitespaces" = whitespace*
