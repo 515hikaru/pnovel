@@ -25,7 +25,7 @@ export const transform = (content: string) => {
 const main = () => {
   // validate arguments
   program
-    .version('v0.4.6-dev')
+    .version('v0.4.6')
     .parse(process.argv)
   if (program.args.length === 0) {
     console.log('pnovel needs a file path.')
