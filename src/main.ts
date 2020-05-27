@@ -14,6 +14,14 @@ const readFile = (file: string) => {
   return fs.readFileSync(filePath, 'utf-8')
 }
 
+export const transform = (content: string) => {
+  if (content.slice(-1) !== '\n') {
+    content += '\n'
+  }
+  const jsonContent = parse(content)
+  return parseEntireDocument(jsonContent)
+}
+
 const main = () => {
   // validate arguments
   program
@@ -34,9 +42,10 @@ const main = () => {
     return
   }
   const fileContent = readFile(file)
-  const parsedJSON = parse(fileContent)
-  const evals = parseEntireDocument(parsedJSON)
-  console.log(evals)
+  const transformedContent = transform(fileContent)
+  console.log(transformedContent)
 }
 
-main()
+if (require.main === module) {
+  main()
+}

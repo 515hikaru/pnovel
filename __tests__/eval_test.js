@@ -1,6 +1,5 @@
 import { parseDocumentBlock, parseEntireDocument } from '../src/eval'
-import { TestScheduler } from 'jest'
-// import { TestScheduler } from 'jest';
+
 
 describe('parser', () => {
   test('parse paragraph node', () => {
