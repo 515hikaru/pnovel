@@ -22,7 +22,7 @@ export const transform = (content: string) => {
   return parseEntireDocument(jsonContent)
 }
 
-const main = () => {
+export const main = () => {
   // validate arguments
   program
     .version('v0.4.6')
@@ -46,6 +46,4 @@ const main = () => {
   console.log(transformedContent)
 }
 
-if (require.main === module) {
-  main()
-}
+exports.main = main

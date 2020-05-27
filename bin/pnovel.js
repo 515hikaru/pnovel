@@ -1,2 +1,3 @@
 #!/usr/bin/env node
-require('../dist/main.js')
+const main = require('../dist/main.js')
+main.main()
