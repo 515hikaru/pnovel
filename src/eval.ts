@@ -25,7 +25,7 @@ export function parseDocumentBlock (node: DocumentBlock): string {
     }
     case 'raw': {
       const text: string = contents
-      return text
+      return text + '\n'
     }
     case 'break':
       return '\n'
