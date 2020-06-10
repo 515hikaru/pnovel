@@ -23,6 +23,10 @@ export function parseDocumentBlock (node: DocumentBlock): string {
       const text: string = contents
       return text
     }
+    case 'raw': {
+      const text: string = contents
+      return text
+    }
     case 'break':
       return '\n'
     default:

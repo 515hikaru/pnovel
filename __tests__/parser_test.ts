@@ -32,6 +32,8 @@ def
 （心！の声！）
 
 （心？の声？）
+
+[newpage]
 `
     const expected = {
       type: 'doc',
@@ -58,6 +60,8 @@ def
             { type: 'speaking', contents: '（心！　の声！）' },
             { type: 'break' },
             { type: 'speaking', contents: '（心？　の声？）' },
+            { type: 'break' },
+            { type: 'raw', contents: '[newpage]' },
           ],
     }
     expect(parse(input)).toStrictEqual(expected)

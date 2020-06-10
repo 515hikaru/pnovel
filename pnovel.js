@@ -20,7 +20,7 @@ doc = block: block + {
   return { type: "doc", contents: block };
 }
 
-block =  emptyline / comment / header / sentence / speaking / breakline
+block =  emptyline / newpageLine / comment / header / sentence / speaking / breakline
 
 header = prefix:"#" whitespaces line:(char+ blankline) {
   const str = makeLine(line)
@@ -46,7 +46,7 @@ emptyline = whitespaces "[newline]" whitespaces breakline {
 }
 
 newpageLine = whitespaces "[newpage]" whitespaces breakline {
-  return {type: "break", contents: "[newpage]"}
+  return {type: "raw", contents: "[newpage]"}
 }
 
 comment = whitespaces "%" comment:char+ breakline {
