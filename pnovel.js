@@ -45,6 +45,10 @@ emptyline = whitespaces "[newline]" whitespaces breakline {
   return {type: "break", contents: ""}
 }
 
+newpageLine = whitespaces "[newpage]" whitespaces breakline {
+  return {type: "break", contents: "[newpage]"}
+}
+
 comment = whitespaces "%" comment:char+ breakline {
   return {type: "comment", contents: comment.join("").trim()}
 }
