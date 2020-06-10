@@ -64,7 +64,6 @@ def
             { type: 'speaking', contents: '（心？　の声？）' },
             { type: 'break' },
             { type: 'raw', contents: '[newpage]' },
-            { type: 'break' },
             { type: 'sentence', contents: 'あ' },
           ],
     }

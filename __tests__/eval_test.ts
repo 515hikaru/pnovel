@@ -35,6 +35,6 @@ describe('parser', () => {
       { type: 'raw', contents: '[newpage]'},
       { type: 'break', contents: ''},
     ]}
-    expect(parseEntireDocument(obj)).toBe('[chapter:foo]\n　foo\n[newpage]\n')
+    expect(parseEntireDocument(obj)).toBe('[chapter:foo]\n　foo\n[newpage]\n\n')
   })
 })
