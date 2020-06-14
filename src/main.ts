@@ -7,26 +7,49 @@ import { Command } from 'commander'
 import { parse } from '../parser/parser'
 import { parseEntireDocument } from './eval'
 
+const VERSION = 'v0.4.8-dev'
+
 const program = new Command()
 
-const readFile = (file: string) => {
+function initProgram() {
+  program
+    .version(VERSION)
+    .option('-d, --debug', 'Show a result of parsing.')
+    .option('-s, --stdin', 'Read from standard input')
+    .option('-o, --output <file>', 'Place the output into <file>.')
+    .parse(process.argv)
+}
+
+function readFile(file: string) {
   const filePath = path.resolve(file)
   return fs.readFileSync(filePath, 'utf-8')
 }
 
-export const transform = (content: string) => {
-  if (content.slice(-1) !== '\n') {
+function writeFile(outputPath: string, content: string) {
+  content = addLastEmptyLine(content)
+  try {
+    fs.writeFileSync(outputPath, content);
+  }  catch(e) {
+    console.error(e.message)
+  }
+}
+
+function addLastEmptyLine(content: string) {
+  if(content.slice(-1) !== '\n') {
     content += '\n'
   }
+  return content
+}
+
+export function transform(content: string) {
+  content = addLastEmptyLine(content)
   const jsonContent = parse(content)
+  if (program.debug) console.debug(jsonContent)
   return parseEntireDocument(jsonContent)
 }
 
-export const main = () => {
-  // validate arguments
-  program
-    .version('v0.4.8-dev')
-    .parse(process.argv)
+export function main() {
+  initProgram()
   if (program.args.length === 0) {
     console.log('pnovel needs a file path.')
     console.log('$ pnovel <file path>')
@@ -43,6 +66,10 @@ export const main = () => {
   }
   const fileContent = readFile(file)
   const transformedContent = transform(fileContent)
+  if (program.output) {
+    writeFile(program.output, transformedContent)
+    return
+  }
   console.log(transformedContent)
 }
 
