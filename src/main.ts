@@ -12,7 +12,7 @@ const VERSION = 'v0.4.8-dev'
 
 const program = new Command()
 
-function initProgram() {
+function initProgram () {
   program
     .version(VERSION)
     .option('-d, --debug', 'Show a result of parsing.')
@@ -21,7 +21,7 @@ function initProgram() {
     .parse(process.argv)
 }
 
-function lookUpFile(): string {
+function lookUpFile (): string {
   // look up the file path
   if (program.stdin) return ''
   if (program.args.length === 0) {
@@ -40,45 +40,45 @@ $ pnovel <file path>
   return file
 }
 
-function readFile(file: string) {
+function readFile (file: string) {
   if (program.stdin) return fs.readFileSync(process.stdin.fd, 'utf-8')
   const filePath = path.resolve(file)
   return fs.readFileSync(filePath, 'utf-8')
 }
 
-function writeFile(outputPath: string, content: string) {
+function writeFile (outputPath: string, content: string) {
   content = addLastEmptyLine(content)
   try {
-    fs.writeFileSync(outputPath, content);
-  }  catch(e) {
+    fs.writeFileSync(outputPath, content)
+  } catch (e) {
     console.error(e.message)
   }
 }
 
-function addLastEmptyLine(content: string) {
-  if(content.slice(-1) !== '\n') {
+function addLastEmptyLine (content: string) {
+  if (content.slice(-1) !== '\n') {
     content += '\n'
   }
   return content
 }
 
-export function transform(content: string) {
+export function transform (content: string) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(jsonContent)
   return parseEntireDocument(jsonContent)
 }
 
-export function main() {
+export function main () {
   initProgram()
   console.log(program.stdin)
   let file = ''
   try {
     file = lookUpFile()
-  } catch(e) {
+  } catch (e) {
     console.log(e.message)
     return
-  }  
+  }
 
   console.log('file =', file)
   const fileContent = readFile(file)
