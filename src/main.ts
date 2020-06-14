@@ -74,7 +74,6 @@ export function transform (content: string) {
 
 export function main () {
   initProgram()
-  console.log(program.stdin)
   let file = ''
   try {
     file = lookUpFile()
@@ -83,7 +82,6 @@ export function main () {
     return
   }
 
-  console.log('file =', file)
   const fileContent = readFile(file)
   const transformedContent = transform(fileContent)
   if (program.output) {
