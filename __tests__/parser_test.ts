@@ -61,9 +61,6 @@ def
             { type: 'text', contents: 'こんにち' },
             { type: 'text', contents: 'は' }
           ]
-        },
-        {
-          type: 'break', contents: []
         }
       ]
     }

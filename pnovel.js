@@ -10,11 +10,11 @@ doc = block:block+ {
 
 block = blank / header / speaking / sentence 
 
-header = [#] _ content:content+ {
+header = [#] _ content:content+ blank {
   return {type: "header", contents: content}
 }
 
-speaking = [「（] content:content+ [」）]{
+speaking = [「（] content:content+ [」）] blank {
   return {type: "speaking", contents: content}
 }
 
