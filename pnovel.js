@@ -2,73 +2,46 @@
  * Definition of pnovel parser
  */
 
-{
-  function makeLine(l) {
-    const chars = l.flat(2)
-    return chars.join("").trim().replace(/(\r\n|\n|\r)/gm, "")
-  }
-
-  function isSymbol(char) {
-    const symbols = ['!', '?', '！', '？']
-    return symbols.includes(char)
-  }
-}
-
 start = doc
 
-doc = block: block + {
-  return { type: "doc", contents: block };
+doc = block:block+ {
+  return { type: "doc", contents: block }
 }
 
-block =  emptyline / comment / header / sentence / speaking / breakline
+block = blank / header / speaking / sentence 
 
-header = prefix:"#" whitespaces line:(char+ blankline) {
-  const str = makeLine(line)
-  return {type: "header", contents: str}
+header = [#] _ content:content+ {
+  return {type: "header", contents: content}
 }
 
-speaking = whitespaces line:(startToken? char+ endToken? blankline)+ {
-  const str = makeLine(line)
-  return {type: "speaking", contents: str}
+speaking = [「（] content:content+ {
+  return {type: "speaking", contents: content}
 }
 
-sentence = whitespaces line:(!startToken char+ !endToken blankline)+ {
-  const str = makeLine(line)
-  return { type: "sentence", contents: str }
+sentence = content:content+ {
+  return {type: "sentence", contents: content}
 }
 
-breakline = (whitespaces blankline)+ {
-  return {type: "break"}
+content = raw / comment / text
+
+text = text:chars blank?{
+  return {type: "text", contents: text}
+}
+comment = "%" _ text:chars _ blank {
+  return {type: "comment", contents: text}
 }
 
-emptyline = whitespaces "[newline]" whitespaces breakline {
-  return {type: "break", contents: ""}
+raw = "`" text:char+ "`" {
+  return {type: "raw", contens: text.join("")}
 }
 
-comment = whitespaces "%" comment:char+ breakline {
-  return {type: "comment", contents: comment.join("").trim()}
+char = [^`%\n]
+chars = text:char+ {
+  const trim_text = text.join("").replace(/[ 　\t\r]/g, '')
+  return trim_text
 }
-
-char = exceptZenkakuSpaceToekn / wideToken / [^\n]
-blankline = [\n]
-startToken = ["「（"]
-endToken = ["」）"]
-
-wideToken = char:[0-9a-zA-Z!?！？] whitespaces {
-  if (!isSymbol(char)) {
-    return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
-  }
-  if (['!', '?'].includes(char)) {
-    char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0)
-  }
-  return  char + '　'
+blank = "\n" {
+  return {type: "break", contents: []}
 }
-exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? whitespaces suffix:endToken {
-  if (['!', '?'].includes(char)) {
-    char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
-  }
-  return char + suffix[0]
-}
-
 whitespace "whitespace" = [ 　\t\r]
-whitespaces "whitespaces" = whitespace*
+_ "whitespaces" = whitespace*
