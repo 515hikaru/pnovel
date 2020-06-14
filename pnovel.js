@@ -14,7 +14,7 @@ header = [#] _ content:content+ {
   return {type: "header", contents: content}
 }
 
-speaking = [「（] content:content+ {
+speaking = [「（] content:content+ [」）]{
   return {type: "speaking", contents: content}
 }
 
@@ -35,7 +35,7 @@ raw = "`" text:char+ "`" {
   return {type: "raw", contens: text.join("")}
 }
 
-char = [^`%\n]
+char = [^「」（）`%\n]
 chars = text:char+ {
   const trim_text = text.join("").replace(/[ 　\t\r]/g, '')
   return trim_text

@@ -6,59 +6,66 @@ describe('parser', () => {
     const input = `abc
 def
 
-  foo
+   aaa
 
-# foo
+こんにちは
 
-　　boo
-# foo
+「こんにちは」
 
-「あああ!」
-
-「ああああ?
-あああ」
-
-「あああ？
-　 」
-
-        
-
-「あっ！　田中さん!」
-
-
-% コメント
-（心の声）
-
-（心！の声！）
-
-（心？の声？）
+「こんにち
+は」
 `
     const expected = {
       type: 'doc',
       contents: [
-            { type: 'sentence', contents: 'ａｂｃｄｅｆ'},
-            { type: 'break'},
-            { type: 'sentence', contents: 'ｆｏｏ'},
-            { type: 'break'},
-            { type: 'header', contents: 'ｆｏｏ'},
-            { type: 'break'},
-            { type: 'sentence', contents: 'ｂｏｏ# ｆｏｏ'},
-            { type: 'break' },
-            { type: 'speaking', contents: '「あああ！」' },
-            { type: 'break' },
-            { type: 'speaking', contents: '「ああああ？　あああ」'},
-            { type: 'break'},
-            { type: 'speaking', contents: '「あああ？」'},
-            { type: 'break' },
-            { type: 'speaking', contents: '「あっ！　田中さん！」' },
-            { type: 'break' },
-            { type: 'comment', contents: 'コメント'},
-            { type: 'speaking', contents: '（心の声）'},
-            { type: 'break' },
-            { type: 'speaking', contents: '（心！　の声！）' },
-            { type: 'break' },
-            { type: 'speaking', contents: '（心？　の声？）' },
-          ],
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'abc' },
+            { type: 'text', contents: 'def' }
+          ]
+        },
+        {
+          type: 'break', contents: []
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'aaa' }
+          ]
+        },
+        {
+          type: 'break', contents: []
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'こんにちは' }
+          ]
+        },
+        {
+          type: 'break', contents: []
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'text', contents: 'こんにちは' }
+          ]
+        },
+        {
+          type: 'break', contents: []
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'text', contents: 'こんにち' },
+            { type: 'text', contents: 'は' }
+          ]
+        },
+        {
+          type: 'break', contents: []
+        }
+      ]
     }
     expect(parse(input)).toStrictEqual(expected)
   })
