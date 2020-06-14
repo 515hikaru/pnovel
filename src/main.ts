@@ -10,6 +10,9 @@ import { parseEntireDocument } from './eval'
 
 const VERSION = 'v0.4.8-dev'
 
+// https://stackoverflow.com/questions/42056246/node-js-process-stdin-issues-with-typescript-tty-readstream-vs-readablestream
+const stdin: any = process.stdin
+
 const program = new Command()
 
 function initProgram () {
@@ -41,7 +44,7 @@ $ pnovel <file path>
 }
 
 function readFile (file: string) {
-  if (program.stdin) return fs.readFileSync(process.stdin.fd, 'utf-8')
+  if (program.stdin) return fs.readFileSync(stdin.fd, 'utf-8')
   const filePath = path.resolve(file)
   return fs.readFileSync(filePath, 'utf-8')
 }
