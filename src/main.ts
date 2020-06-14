@@ -18,9 +18,9 @@ const program = new Command()
 function initProgram () {
   program
     .version(VERSION)
-    .option('-d, --debug', 'Show a result of parsing.')
+    .option('-d, --debug', 'Show a result of parsing')
     .option('-s, --stdin', 'Read from standard input')
-    .option('-o, --output <file>', 'Place the output into <file>.')
+    .option('-o, --output <file>', 'Place the output into <file>')
     .parse(process.argv)
 }
 
