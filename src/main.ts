@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import * as process from 'process'
 
 import { Command } from 'commander'
 
@@ -20,7 +21,27 @@ function initProgram() {
     .parse(process.argv)
 }
 
+function lookUpFile(): string {
+  // look up the file path
+  if (program.stdin) return ''
+  if (program.args.length === 0) {
+    const error = new Error(`pnovel needs a file path.
+$ pnovel <file path>
+`)
+    throw error
+  }
+  const file = program.args[0]
+  try {
+    fs.statSync(path.resolve(file))
+  } catch {
+    const fileNotFoundError = new ReferenceError(`no such a file: ${file}`)
+    throw fileNotFoundError
+  }
+  return file
+}
+
 function readFile(file: string) {
+  if (program.stdin) return fs.readFileSync(process.stdin.fd, 'utf-8')
   const filePath = path.resolve(file)
   return fs.readFileSync(filePath, 'utf-8')
 }
@@ -50,20 +71,16 @@ export function transform(content: string) {
 
 export function main() {
   initProgram()
-  if (program.args.length === 0) {
-    console.log('pnovel needs a file path.')
-    console.log('$ pnovel <file path>')
-    return
-  }
-
-  // look up the file path
-  const file = program.args[0]
+  console.log(program.stdin)
+  let file = ''
   try {
-    fs.statSync(path.resolve(file))
-  } catch {
-    console.log(`no such a file: ${file}`)
+    file = lookUpFile()
+  } catch(e) {
+    console.log(e.message)
     return
-  }
+  }  
+
+  console.log('file =', file)
   const fileContent = readFile(file)
   const transformedContent = transform(fileContent)
   if (program.output) {
