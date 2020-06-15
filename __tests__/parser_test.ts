@@ -8,9 +8,10 @@ def
 
    aaa
 
-こんにちは
+こんにちは % こんにちは
+こんばんは
 
-「こんにちは」
+「こんにちは」  % あいさつ
 
 「こんにち
 は」
@@ -26,40 +27,31 @@ def
           ]
         },
         {
-          type: 'break', contents: []
-        },
-        {
           type: 'sentence',
           contents: [
             { type: 'text', contents: 'aaa' }
           ]
         },
         {
-          type: 'break', contents: []
-        },
-        {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'こんにちは' }
+            { type: 'text', contents: 'こんにちは' },
+            { type: 'comment', contents: 'こんにちは' },
+            { type: 'text', contents: 'こんばんは' }
           ]
-        },
-        {
-          type: 'break', contents: []
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'text', contents: 'こんにちは' }
+            { type: 'speechend', contents: 'こんにちは' },
+            { type: 'comment', contents: 'あいさつ' }
           ]
-        },
-        {
-          type: 'break', contents: []
         },
         {
           type: 'speaking',
           contents: [
             { type: 'text', contents: 'こんにち' },
-            { type: 'text', contents: 'は' }
+            { type: 'speechend', contents: 'は' }
           ]
         }
       ]
