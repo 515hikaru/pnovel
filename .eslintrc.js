@@ -2,7 +2,8 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es6: true
+    es6: true,
+    "jest/globals": true,
   },
   parser: "@typescript-eslint/parser",
   extends: [
@@ -18,6 +19,7 @@ module.exports = {
   rules: {
   },
   plugins: [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "jest",
   ]
 }
