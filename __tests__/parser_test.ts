@@ -16,6 +16,11 @@ def
 「こんにち
 は」
 
+（どうか
+な）
+
+（どうだろう）
+
 \`$  ふふふ &%\` 
 ほげほげ
 
@@ -72,6 +77,20 @@ aa\`\`\`aaa123
             { type: 'speechend', contents: 'は' }
           ]
         },
+        {
+          type: 'thinking',
+          contents: [
+            { type: 'text', contents: 'どうか' },
+            { type: 'thinkend', contents: 'な' }
+          ]
+        },
+        {
+          type: 'thinking',
+          contents: [
+            { type: 'thinkend', contents: 'どうだろう' },
+          ]
+        },
+
         {
           type: 'sentence',
           contents: [
