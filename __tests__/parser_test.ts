@@ -38,6 +38,15 @@ aaa\`\`\` bbb123
 
 aa\`\`\`aaa123
 \`\`\`
+
+[chapter:foo]
+
+[newpage]
+
+hoge [newline] fuga [newline] bar [newline]
+boo
+
+[newline]
 `
     const expected = {
       type: 'doc',
@@ -131,7 +140,36 @@ aa\`\`\`aaa123
             { type: 'raw', contents: 'aaa123'}
           ]
         },
-
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: '[chapter:foo]'}
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: '[newpage]'}
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'ｈｏｇｅ'},
+            { type: 'break', contents: []},
+            { type: 'text', contents: 'ｆｕｇａ'},
+            { type: 'break', contents: []},
+            { type: 'text', contents: 'ｂａｒ'},
+            { type: 'break', contents: []},
+            { type: 'text', contents: 'ｂｏｏ'},
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'break', contents: []},
+          ]
+        },
       ]
     }
     expect(parse(input)).toStrictEqual(expected)
