@@ -47,6 +47,19 @@ hoge [newline] fuga [newline] bar [newline]
 boo
 
 [newline]
+
+「あ！こんにちは」
+
+「え？そうですか」
+
+「あ!こんにちは」
+
+「え?そうですか」
+
+「あ!こんにちは!」
+
+「え?そうですか?」
+
 `
     const expected = {
       type: 'doc',
@@ -168,6 +181,42 @@ boo
           type: 'sentence',
           contents: [
             { type: 'break', contents: []},
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'speechend', contents: 'あ！　こんにちは' },
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'speechend', contents: 'え？　そうですか' },
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'speechend', contents: 'あ！　こんにちは' },
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'speechend', contents: 'え？　そうですか' },
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'speechend', contents: 'あ！　こんにちは！' },
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'speechend', contents: 'え？　そうですか？' },
           ]
         },
       ]
