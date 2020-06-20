@@ -109,116 +109,116 @@ boo
         {
           type: 'thinking',
           contents: [
-            { type: 'thinkend', contents: 'どうだろう' },
+            { type: 'thinkend', contents: 'どうだろう' }
           ]
         },
 
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: '$  ふふふ &%'},
-            { type: 'text', contents: 'ほげほげ'}
+            { type: 'raw', contents: '$  ふふふ &%' },
+            { type: 'text', contents: 'ほげほげ' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: '$  ふふふ &%'},
-            { type: 'text', contents: 'ほげほげ'}
+            { type: 'raw', contents: '$  ふふふ &%' },
+            { type: 'text', contents: 'ほげほげ' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: 'aa\naaaaa\nhogefugabar'}
+            { type: 'raw', contents: 'aa\naaaaa\nhogefugabar' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: 'aaa'}
+            { type: 'raw', contents: 'aaa' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: 'aaa'},
-            { type: 'text', contents: 'ｂｂｂ１２３'},
+            { type: 'raw', contents: 'aaa' },
+            { type: 'text', contents: 'ｂｂｂ１２３' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'ａａ'},
-            { type: 'raw', contents: 'aaa123'}
+            { type: 'text', contents: 'ａａ' },
+            { type: 'raw', contents: 'aaa123' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: '[chapter:foo]'}
+            { type: 'raw', contents: '[chapter:foo]' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'raw', contents: '[newpage]'}
+            { type: 'raw', contents: '[newpage]' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'ｈｏｇｅ'},
-            { type: 'break', contents: []},
-            { type: 'text', contents: 'ｆｕｇａ'},
-            { type: 'break', contents: []},
-            { type: 'text', contents: 'ｂａｒ'},
-            { type: 'break', contents: []},
-            { type: 'text', contents: 'ｂｏｏ'},
+            { type: 'text', contents: 'ｈｏｇｅ' },
+            { type: 'break', contents: [] },
+            { type: 'text', contents: 'ｆｕｇａ' },
+            { type: 'break', contents: [] },
+            { type: 'text', contents: 'ｂａｒ' },
+            { type: 'break', contents: [] },
+            { type: 'text', contents: 'ｂｏｏ' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'break', contents: []},
+            { type: 'break', contents: [] }
           ]
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'speechend', contents: 'あ！　こんにちは' },
+            { type: 'speechend', contents: 'あ！　こんにちは' }
           ]
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'speechend', contents: 'え？　そうですか' },
+            { type: 'speechend', contents: 'え？　そうですか' }
           ]
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'speechend', contents: 'あ！　こんにちは' },
+            { type: 'speechend', contents: 'あ！　こんにちは' }
           ]
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'speechend', contents: 'え？　そうですか' },
+            { type: 'speechend', contents: 'え？　そうですか' }
           ]
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'speechend', contents: 'あ！　こんにちは！' },
+            { type: 'speechend', contents: 'あ！　こんにちは！' }
           ]
         },
         {
           type: 'speaking',
           contents: [
-            { type: 'speechend', contents: 'え？　そうですか？' },
+            { type: 'speechend', contents: 'え？　そうですか？' }
           ]
-        },
+        }
       ]
     }
     expect(parse(input)).toStrictEqual(expected)
