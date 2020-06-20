@@ -23,9 +23,9 @@
     "prepack": "pegjs -o parser/parser.js pnovel.js && webpack",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src/*.ts",
-    "fix": "eslint --fix src/*.ts",
+    "fix": "eslint --fix **/*.ts",
     "start": "node dist/main.js",
-    "test": "jest",
+    "test": "npm run generate && jest",
     "build": "webpack"
   },
   "devDependencies": {
