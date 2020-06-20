@@ -15,6 +15,24 @@ def
 
 「こんにち
 は」
+
+\`$  ふふふ &%\` 
+ほげほげ
+
+\`$  ふふふ &%\` ほげほげ
+
+\`\`\`aa
+aaaaa
+hogefugabar
+\`\`\`
+
+\`\`\`aaa\`\`\`
+
+\`\`\`
+aaa\`\`\` bbb
+
+aa\`\`\`aaa
+\`\`\`
 `
     const expected = {
       type: 'doc',
@@ -53,7 +71,48 @@ def
             { type: 'text', contents: 'こんにち' },
             { type: 'speechend', contents: 'は' }
           ]
-        }
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: '$  ふふふ &%'},
+            { type: 'text', contents: 'ほげほげ'}
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: '$  ふふふ &%'},
+            { type: 'text', contents: 'ほげほげ'}
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: 'aa\naaaaa\nhogefugabar'}
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: 'aaa'}
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'raw', contents: 'aaa'},
+            { type: 'text', contents: 'bbb'},
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'aa'},
+            { type: 'raw', contents: 'aaa'}
+          ]
+        },
+
       ]
     }
     expect(parse(input)).toStrictEqual(expected)

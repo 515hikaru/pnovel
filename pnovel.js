@@ -27,7 +27,7 @@ sentence = content:content+ _ blank? {
   return {type: "sentence", contents: content}
 }
 
-content = raw / comment / speakend / thinkend / text
+content = rawBlock / rawToken / comment / speakend / thinkend / text
 
 text = _ text:chars _ blank? {
   return {type: "text", contents: text}
@@ -36,8 +36,16 @@ comment = _ "%" _ text:[^\n]+ _ blank? {
   return {type: "comment", contents: text.join("")}
 }
 
-raw = "`" text:.+ "`" {
+rawToken = "`" text:[^\n"`"]+ "`" _ blank? {
   return {type: "raw", contents: text.join("")}
+}
+
+rawBlock = _ "```" blank? text:([^\n"`"]+ blank?)+ _ blank? _ "```" blank? {
+  const lines = []
+  text.forEach(line => {
+    lines.push(line[0].join(""))
+  });
+  return {type: "raw", contents: lines.join("\n")}
 }
 
 speakend = _ text:chars _ "」" _ blank? {
