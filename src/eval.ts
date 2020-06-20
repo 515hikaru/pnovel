@@ -19,6 +19,12 @@ export function parseDocumentToken (node: DocumentToken): string {
     case 'comment': {
       return ''
     }
+    case 'speechend': {
+      return contents + '」'
+    }
+    case 'thinkend': {
+      return contents + '）'
+    }
     default:
       return contents
   }
@@ -38,10 +44,10 @@ function parseDocumentBlock (node: DocumentBlock): string {
       return '　' + results.join('')
     }
     case 'speaking': {
-      return '「' + results.join('') + '」'
+      return '「' + results.join('')
     }
     case 'thinking': {
-      return '（' + results.join('') + '）'
+      return '（' + results.join('')
     }
     case 'header': {
       return `[chapter:${results.join()}]`
