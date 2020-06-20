@@ -38,10 +38,13 @@ function parseDocumentBlock (node: DocumentBlock): string {
       return '　' + results.join('')
     }
     case 'speaking': {
-      return '「' + results.join('') + "」"
+      return '「' + results.join('') + '」'
     }
     case 'thinking': {
-      return '（' + results.join('') + "）"
+      return '（' + results.join('') + '）'
+    }
+    case 'header': {
+      return `[chapter:${results.join()}]`
     }
     default: {
       return results.join('')

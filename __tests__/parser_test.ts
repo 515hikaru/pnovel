@@ -14,7 +14,7 @@ def
 「こんにちは」  % あいさつ
 
 「こんにち
-は」
+  は」  % あいさつつ
 
 （どうか
 な）
@@ -60,6 +60,7 @@ boo
 
 「え?そうですか?」
 
+# 見出し
 `
     const expected = {
       type: 'doc',
@@ -96,7 +97,8 @@ boo
           type: 'speaking',
           contents: [
             { type: 'text', contents: 'こんにち' },
-            { type: 'speechend', contents: 'は' }
+            { type: 'speechend', contents: 'は' },
+            { type: 'comment', contents: 'あいさつつ' }
           ]
         },
         {
@@ -217,6 +219,12 @@ boo
           type: 'speaking',
           contents: [
             { type: 'speechend', contents: 'え？　そうですか？' }
+          ]
+        },
+        {
+          type: 'header',
+          contents: [
+            { type: 'text', contents: '見出し' }
           ]
         }
       ]

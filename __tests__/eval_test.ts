@@ -1,6 +1,5 @@
 import { parseDocumentBlock, parseEntireDocument } from '../src/eval'
 
-
 describe('parser', () => {
   test('parse paragraph node', () => {
     const obj = { type: 'sentence', contents: 'foo' }
@@ -22,16 +21,19 @@ describe('parser', () => {
   })
 
   test('comment parser', () => {
-    const obj = {type: 'cooment', contents: 'コメント'}
+    const obj = { type: 'cooment', contents: 'コメント' }
     expect(parseDocumentBlock(obj)).toBe('')
   })
 
   test('parse entire document', () => {
-    const obj = {type: 'doc', contents: [
-      { type: 'header', contents: 'foo' },
-      { type: 'break', contents: ''},
-      { type: 'sentence', contents: 'foo'},
-    ]}
+    const obj = {
+      type: 'doc',
+      contents: [
+        { type: 'header', contents: 'foo' },
+        { type: 'break', contents: '' },
+        { type: 'sentence', contents: 'foo' }
+      ]
+    }
     expect(parseEntireDocument(obj)).toBe('[chapter:foo]\n　foo')
   })
 })

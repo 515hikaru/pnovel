@@ -11,7 +11,7 @@ doc = block:block+ {
 block = blank / header / speaking / thinking / sentence 
 
 // 見出しは1行
-header = [#] _ content:content+ _ blank {
+header = "#" _ content:content+ _ blank? {
   return {type: "header", contents: content}
 }
 
@@ -19,7 +19,7 @@ speaking = _ "「" _ content:content+  blank? {
   return {type: "speaking", contents: content}
 }
 
-thinking = "（" _ content:content+ blank? {
+thinking = _ "（" _ content:content+ blank? {
   return { type: "thinking", contents: content}
 }
 
@@ -82,7 +82,7 @@ thinkend = _ text:chars _  "）" _ blank? {
 }
 
 
-char = [^「」（）\[\]!?！？`%\n]
+char = [^「」（）\[\]!?！？`%#\n]
 useChar = whitespace / specialSymbol / hankakuEisu / char
 chars = text:useChar+ {
   return text.join("")

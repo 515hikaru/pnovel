@@ -17,6 +17,7 @@ module.exports = {
     ecmaVersion: 11
   },
   rules: {
+    "no-irregular-whitespace": 0,
   },
   plugins: [
     "@typescript-eslint",
