@@ -16,35 +16,34 @@ interface Document {
 export function parseDocumentToken (node: DocumentToken): string {
   const { type, contents } = node
   switch (type) {
-    case 'text':
-      return contents
-    case 'raw': {
-      return contents
+    case 'comment': {
+      return ''
     }
-    case 'comment':
-      return ''
-    case 'token':
-      return contents
-    case 'break':
-      return '\n'
     default:
-      return ''
+      return contents
   }
 }
 
 function parseDocumentBlock (node: DocumentBlock): string {
   const { type, contents } = node
-
+  const results: string[] = []
   contents.forEach(element => {
+    results.push(parseDocumentToken(element))
   })
   switch (type) {
-    case 'break':
-      return '\n'
+    case 'sentence': {
+      if (contents[0].type === 'raw') {
+        return results.join('')
+      }
+      return '　' + results.join('')
+    }
+    case 'speaking': {
+      return '「' + results.join('') + "」"
+    }
+    case 'thinking': {
+      return '（' + results.join('') + "）"
+    }
     default: {
-      const results: string[] = []
-      contents.forEach(element => {
-        results.push(parseDocumentToken(element))
-      })
       return results.join('')
     }
   }
@@ -59,7 +58,7 @@ export function parseEntireDocument (node: Document): string {
         const text = parseDocumentBlock(element)
         results.push(text)
       })
-      return results.join('')
+      return results.join('\n') + '\n'
     }
     default:
       return ''

@@ -32,7 +32,7 @@ content = newLineToken / specialToken / rawBlock / rawToken / comment / speakend
 text = _ text:chars _ blank? {
   return {type: "text", contents: text}
 }
-comment = _ "%" _ text:[^\n]+ _ blank? {
+comment = _ "%" _ text:[^\n]+ _ blank {
   return {type: "comment", contents: text.join("")}
 }
 
@@ -58,7 +58,6 @@ newLineToken = _ "[newline]" _ blank? {
 
 speakend = _ texts:(speechChars _ specialSymbol?)+ "」" _ blank? {
   const useTexts = []
-  console.log(texts)
   const lastIndex = texts.length - 1
   texts.forEach((text, i,) => {
     if (i == lastIndex && text[2]) {
