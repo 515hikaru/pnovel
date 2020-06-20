@@ -2,73 +2,110 @@
  * Definition of pnovel parser
  */
 
-{
-  function makeLine(l) {
-    const chars = l.flat(2)
-    return chars.join("").trim().replace(/(\r\n|\n|\r)/gm, "")
-  }
-
-  function isSymbol(char) {
-    const symbols = ['!', '?', '！', '？']
-    return symbols.includes(char)
-  }
-}
-
 start = doc
 
-doc = block: block + {
-  return { type: "doc", contents: block };
+doc = block:block+ {
+  return { type: "doc", contents: block }
 }
 
-block =  emptyline / comment / header / sentence / speaking / breakline
+block = blank / header / speaking / thinking / sentence 
 
-header = prefix:"#" whitespaces line:(char+ blankline) {
-  const str = makeLine(line)
-  return {type: "header", contents: str}
+// 見出しは1行
+header = "#" _ content:content+ _ blank? {
+  return {type: "header", contents: content}
 }
 
-speaking = whitespaces line:(startToken? char+ endToken? blankline)+ {
-  const str = makeLine(line)
-  return {type: "speaking", contents: str}
+speaking = _ "「" _ content:content+  blank? {
+  return {type: "speaking", contents: content}
 }
 
-sentence = whitespaces line:(!startToken char+ !endToken blankline)+ {
-  const str = makeLine(line)
-  return { type: "sentence", contents: str }
+thinking = _ "（" _ content:content+ blank? {
+  return { type: "thinking", contents: content}
 }
 
-breakline = (whitespaces blankline)+ {
-  return {type: "break"}
+sentence = content:content+ _ blank? {
+  return {type: "sentence", contents: content}
 }
 
-emptyline = whitespaces "[newline]" whitespaces breakline {
-  return {type: "break", contents: ""}
+content = newLineToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
+
+text = _ text:chars _ blank? {
+  return {type: "text", contents: text}
+}
+comment = _ "%" _ text:[^\n]+ _ blank {
+  return {type: "comment", contents: text.join("")}
 }
 
-comment = whitespaces "%" comment:char+ breakline {
-  return {type: "comment", contents: comment.join("").trim()}
+rawToken = "`" text:[^\n"`"]+ "`" _ blank? {
+  return {type: "raw", contents: text.join("")}
 }
 
-char = exceptZenkakuSpaceToekn / wideToken / [^\n]
-blankline = [\n]
-startToken = ["「（"]
-endToken = ["」）"]
+rawBlock = _ "```" blank? text:([^\n"`"]+ blank?)+ _ blank? _ "```" blank? {
+  const lines = []
+  text.forEach(line => {
+    lines.push(line[0].join(""))
+  });
+  return {type: "raw", contents: lines.join("\n")}
+}
 
-wideToken = char:[0-9a-zA-Z!?！？] whitespaces {
-  if (!isSymbol(char)) {
-    return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
+specialToken = _ "[" text:[^\]\n]+ "]" _ blank? {
+  return {type: "raw", contents: "[" + text.join("") + "]"}
+}
+
+newLineToken = _ "[newline]" _ blank? {
+  return {type: "break", contents: []}  
+}
+
+speakend = _ texts:(speechChars _ specialSymbol?)+ "」" _ blank? {
+  const useTexts = []
+  const lastIndex = texts.length - 1
+  texts.forEach((text, i,) => {
+    if (i == lastIndex && text[2]) {
+      const t = text[0] + text[2][0]
+      useTexts.push(t)
+      return
+    }
+    if (text[2]) {
+      const t = text[0] + text[2]
+      useTexts.push(t)
+      return
+    }
+    const t = text[0]
+    useTexts.push(t)
+    return
+  })
+  return {type: "speechend", contents: useTexts.join("") }
+}
+
+thinkend = _ text:chars _  "）" _ blank? {
+  return {type: "thinkend", contents: text }
+}
+
+
+char = [^「」（）\[\]!?！？`%#\n]
+useChar = whitespace / specialSymbol / hankakuEisu / char
+chars = text:useChar+ {
+  return text.join("")
+}
+speechChar = whitespace / hankakuEisu / char
+speechChars = text:speechChar+ {
+  return text.join("")
+}
+hankakuEisu = c:[a-zA-Z0-9] {
+  return String.fromCharCode(c.charCodeAt(0) + 0xFEE0);
+}
+
+specialSymbol = s:[!?！？] {
+  if (["!", "?"].includes(s)) {
+    s = String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
   }
-  if (['!', '?'].includes(char)) {
-    char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0)
-  }
-  return  char + '　'
-}
-exceptZenkakuSpaceToekn = char:[!！?？] whitespaces blankline? whitespaces suffix:endToken {
-  if (['!', '?'].includes(char)) {
-    char = String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
-  }
-  return char + suffix[0]
+  return s + "　"
 }
 
-whitespace "whitespace" = [ 　\t\r]
-whitespaces "whitespaces" = whitespace*
+blank = "\n" {
+  return {type: "break", contents: []}
+}
+whitespace "whitespace" = [ 　\t\r] {
+  return ''
+}
+_ "whitespaces" = whitespace*
