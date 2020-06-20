@@ -29,9 +29,9 @@ hogefugabar
 \`\`\`aaa\`\`\`
 
 \`\`\`
-aaa\`\`\` bbb
+aaa\`\`\` bbb123
 
-aa\`\`\`aaa
+aa\`\`\`aaa123
 \`\`\`
 `
     const expected = {
@@ -40,14 +40,14 @@ aa\`\`\`aaa
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'abc' },
-            { type: 'text', contents: 'def' }
+            { type: 'text', contents: 'ａｂｃ' },
+            { type: 'text', contents: 'ｄｅｆ' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'aaa' }
+            { type: 'text', contents: 'ａａａ' }
           ]
         },
         {
@@ -102,14 +102,14 @@ aa\`\`\`aaa
           type: 'sentence',
           contents: [
             { type: 'raw', contents: 'aaa'},
-            { type: 'text', contents: 'bbb'},
+            { type: 'text', contents: 'ｂｂｂ１２３'},
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'aa'},
-            { type: 'raw', contents: 'aaa'}
+            { type: 'text', contents: 'ａａ'},
+            { type: 'raw', contents: 'aaa123'}
           ]
         },
 

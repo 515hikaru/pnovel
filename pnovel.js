@@ -58,10 +58,15 @@ thinkend = _ text:chars _  "）" _ blank? {
 
 
 char = [^「」（）`%\n]
-useChar = whitespace / char
+useChar = whitespace / hankakuEisu / char
 chars = text:useChar+ {
   return text.join("")
 }
+
+hankakuEisu = c:[a-zA-Z0-9] {
+  return String.fromCharCode(c.charCodeAt(0) + 0xFEE0);
+}
+
 blank = "\n" {
   return {type: "break", contents: []}
 }
