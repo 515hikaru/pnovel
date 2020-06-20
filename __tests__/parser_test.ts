@@ -60,7 +60,14 @@ boo
 
 「え?そうですか?」
 
+（うーん？こんにちは？）
+
+（あ！そうだった！）
+
 # 見出し
+
+はぁ。「ちょっと待って
+よ」と言った。
 `
     const expected = {
       type: 'doc',
@@ -222,11 +229,38 @@ boo
           ]
         },
         {
+          type: 'thinking',
+          contents: [
+            { type: 'thinkend', contents: 'うーん？　こんにちは？' }
+          ]
+        },
+        {
+          type: 'thinking',
+          contents: [
+            { type: 'thinkend', contents: 'あ！　そうだった！' }
+          ]
+        },
+        {
           type: 'header',
           contents: [
             { type: 'text', contents: '見出し' }
           ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'はぁ。' }
+          ]
+        },
+        {
+          type: 'speaking',
+          contents: [
+            { type: 'text', contents: 'ちょっと待って' },
+            { type: 'speechend', contents: 'よ' },
+            { type: 'text', contents: 'と言った。'}
+          ]
         }
+
       ]
     }
     expect(parse(input)).toStrictEqual(expected)

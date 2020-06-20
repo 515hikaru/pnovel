@@ -2,6 +2,31 @@
  * Definition of pnovel parser
  */
 
+{
+
+  function flattenEndSymbols(texts) {
+    const useTexts = []
+    const lastIndex = texts.length - 1
+    texts.forEach((text, i,) => {
+      if (i == lastIndex && text[2]) {
+        const t = text[0] + text[2][0]
+        useTexts.push(t)
+        return
+      }
+      if (text[2]) {
+        const t = text[0] + text[2]
+        useTexts.push(t)
+        return
+      }
+      const t = text[0]
+      useTexts.push(t)
+      return
+    })
+    return useTexts
+  }
+
+}
+
 start = doc
 
 doc = block:block+ {
@@ -57,28 +82,13 @@ newLineToken = _ "[newline]" _ blank? {
 }
 
 speakend = _ texts:(speechChars _ specialSymbol?)+ "」" _ blank? {
-  const useTexts = []
-  const lastIndex = texts.length - 1
-  texts.forEach((text, i,) => {
-    if (i == lastIndex && text[2]) {
-      const t = text[0] + text[2][0]
-      useTexts.push(t)
-      return
-    }
-    if (text[2]) {
-      const t = text[0] + text[2]
-      useTexts.push(t)
-      return
-    }
-    const t = text[0]
-    useTexts.push(t)
-    return
-  })
+  const useTexts = flattenEndSymbols(texts)
   return {type: "speechend", contents: useTexts.join("") }
 }
 
-thinkend = _ text:chars _  "）" _ blank? {
-  return {type: "thinkend", contents: text }
+thinkend = _ texts:(speechChars _ specialSymbol?)+ "）" _ blank? {
+  const useTexts = flattenEndSymbols(texts)
+  return {type: "thinkend", contents: useTexts.join("") }
 }
 
 

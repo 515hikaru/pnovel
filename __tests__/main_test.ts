@@ -27,12 +27,18 @@ def
 「こんにちは」  % あいさつ
 
 # 見出し
+
+はぁ。「ちょっと待って
+よ」と言った。
+
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
 　こんにちは。こんばんは
 「こんにちは」
 [chapter:見出し]
+　はぁ。
+「ちょっと待ってよ」と言った。
 `
     const result = transform(text)
     expect(result).toBe(expected)
