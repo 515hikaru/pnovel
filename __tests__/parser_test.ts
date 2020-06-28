@@ -68,6 +68,14 @@ boo
 
 はぁ。「ちょっと待って
 よ」と言った。
+
+はぁ。
+「ちょっと待ってよ」
+と言った。
+
+はぁ。
+「ちょっと！待ってよ！」
+と言った。
 `
     const expected = {
       type: 'doc',
@@ -249,18 +257,27 @@ boo
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'はぁ。' }
+            { type: 'text', contents: 'はぁ。「ちょっと待って' },
+            { type: 'speechend', contents: 'よ' },
+            { type: 'text', contents: 'と言った。' }
           ]
         },
         {
-          type: 'speaking',
+          type: 'sentence',
           contents: [
-            { type: 'text', contents: 'ちょっと待って' },
-            { type: 'speechend', contents: 'よ' },
-            { type: 'text', contents: 'と言った。'}
+            { type: 'text', contents: 'はぁ。' },
+            { type: 'text', contents: '「ちょっと待ってよ」' },
+            { type: 'text', contents: 'と言った。' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'はぁ。' },
+            { type: 'text', contents: '「ちょっと！　待ってよ！」' },
+            { type: 'text', contents: 'と言った。' }
           ]
         }
-
       ]
     }
     expect(parse(input)).toStrictEqual(expected)
