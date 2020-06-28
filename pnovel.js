@@ -54,7 +54,7 @@ sentence = content:content+ _ blank? {
 
 content = newLineToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
 
-text = _ text:chars _ blank? {
+text = _ text:contentChars _ blank? {
   return {type: "text", contents: text}
 }
 comment = _ "%" _ text:[^\n]+ _ blank {
@@ -93,14 +93,24 @@ thinkend = _ texts:(speechChars _ specialSymbol?)+ "）" _ blank? {
 
 
 char = [^「」（）\[\]!?！？`%#\n]
-useChar = whitespace / specialSymbol / hankakuEisu / char
+contentChar = [^\[\]!?！？`%#\n]
+
+useChar = whitespace / endOfSpecialSymbol / specialSymbol / hankakuEisu / char
+useContentChar = whitespace / endOfSpecialSymbol / specialSymbol / hankakuEisu / contentChar
+speechChar = whitespace / hankakuEisu / char
+
 chars = text:useChar+ {
   return text.join("")
 }
-speechChar = whitespace / hankakuEisu / char
+
+contentChars = text:useContentChar+ {
+  return text.join("")
+}
+
 speechChars = text:speechChar+ {
   return text.join("")
 }
+
 hankakuEisu = c:[a-zA-Z0-9] {
   return String.fromCharCode(c.charCodeAt(0) + 0xFEE0);
 }
@@ -110,6 +120,13 @@ specialSymbol = s:[!?！？] {
     s = String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
   }
   return s + "　"
+}
+
+endOfSpecialSymbol = s:[!?！？] t:[」）] {
+  if (["!", "?"].includes(s)) {
+    s = String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+  }
+  return s + t
 }
 
 blank = "\n" {
