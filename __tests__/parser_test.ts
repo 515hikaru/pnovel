@@ -328,37 +328,37 @@ boo
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'あー！' }
+            { type: 'text', contents: 'あー！　' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'えー？' }
+            { type: 'text', contents: 'えー？　' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'うー？' }
+            { type: 'text', contents: 'うー？　' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'おー！' }
+            { type: 'text', contents: 'おー！　' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: 'わー！？' }
+            { type: 'text', contents: 'わー！？　' }
           ]
         },
         {
           type: 'sentence',
           contents: [
-            { type: 'text', contents: '！！！！！！！' }
+            { type: 'text', contents: '！！！！！！！　' }
           ]
         }
 

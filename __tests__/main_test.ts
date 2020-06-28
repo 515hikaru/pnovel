@@ -35,6 +35,8 @@ def
 ながらも、ついていくしかなかった。
 
 あー！!!!??
+
+あああ\`あああ　\`
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -44,6 +46,7 @@ def
 　はぁ。「ちょっと待ってよ」と言った。
 　心の中では（うん？　なんだかな？）と思いながらも、ついていくしかなかった。
 　あー！！！！？？
+　ああああああ
 `
     const result = transform(text)
     expect(result).toBe(expected)
