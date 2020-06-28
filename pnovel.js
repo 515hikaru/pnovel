@@ -52,7 +52,7 @@ sentence = content:content+ _ blank? {
   return {type: "sentence", contents: content}
 }
 
-content = newLineToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
+content = newLineToken / pixivRubyToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
 
 text = _ text:contentChars _ blank? {
   return {type: "text", contents: text}
@@ -75,6 +75,10 @@ rawBlock = _ "```" blank? text:([^\n"`"]+ blank?)+ _ blank? _ "```" blank? {
 
 specialToken = _ "[" text:[^\]\n]+ "]" _ blank? {
   return {type: "raw", contents: "[" + text.join("") + "]"}
+}
+
+pixivRubyToken = _ "[" "[" text:[^\]\n]+ "]" "]" _ blank? {
+  return {type: "text", contents: "[[" + text.join("") + "]]"}
 }
 
 newLineToken = _ "[newline]" _ blank? {

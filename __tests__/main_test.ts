@@ -45,6 +45,9 @@ def
 あああ\`あああ　\`
 
 [newpage]
+
+[[rb:漢字 > ふりがな]]
+と書くとルビがふれる。
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -59,6 +62,7 @@ def
 　あああ
 　ああああああ
 [newpage]
+　[[rb:漢字 > ふりがな]]と書くとルビがふれる。
 `
     const result = transform(text)
     expect(result).toBe(expected)
