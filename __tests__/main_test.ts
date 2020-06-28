@@ -36,7 +36,15 @@ def
 
 あー！!!!??
 
+あああ
+
+[newline]
+
+あああ
+
 あああ\`あああ　\`
+
+[newpage]
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -46,7 +54,11 @@ def
 　はぁ。「ちょっと待ってよ」と言った。
 　心の中では（うん？　なんだかな？）と思いながらも、ついていくしかなかった。
 　あー！！！！？？
+　あああ
+
+　あああ
 　ああああああ
+[newpage]
 `
     const result = transform(text)
     expect(result).toBe(expected)
