@@ -33,6 +33,8 @@ def
 
 心の中では（うん？なんだかな？）と思い
 ながらも、ついていくしかなかった。
+
+あー！!!!??
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -41,6 +43,7 @@ def
 [chapter:見出し]
 　はぁ。「ちょっと待ってよ」と言った。
 　心の中では（うん？　なんだかな？）と思いながらも、ついていくしかなかった。
+　あー！！！！？？
 `
     const result = transform(text)
     expect(result).toBe(expected)

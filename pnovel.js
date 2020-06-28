@@ -115,11 +115,15 @@ hankakuEisu = c:[a-zA-Z0-9] {
   return String.fromCharCode(c.charCodeAt(0) + 0xFEE0);
 }
 
-specialSymbol = s:[!?！？] {
-  if (["!", "?"].includes(s)) {
-    s = String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
-  }
-  return s + "　"
+specialSymbol = ss:[!?！？]+ {
+  const tt = []
+  ss.forEach((s) => {
+    if (["!", "?"].includes(s)) {
+      s = String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+    }
+    tt.push(s)
+  })
+  return tt.join("") + "　"
 }
 
 endOfSpecialSymbol = s:[!?！？] t:[」）] {
