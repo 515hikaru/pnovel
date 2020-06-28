@@ -38,10 +38,14 @@ function parseDocumentBlock (node: DocumentBlock): string {
   })
   switch (type) {
     case 'sentence': {
+      let text = ''
       if (contents[0].type === 'raw') {
-        return results.join('')
+        text = results.join('')
+      } else {
+        text = '　' + results.join('')
       }
-      return '　' + results.join('')
+      if (text.slice(-1)[0] === '　') return text.slice(0, text.length - 1)
+      return text
     }
     case 'speaking': {
       return '「' + results.join('')

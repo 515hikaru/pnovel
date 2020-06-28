@@ -87,6 +87,18 @@ boo
 ああ。
 （なんだかな）
 と思った。
+
+あー！
+
+えー？
+
+うー?
+
+おー!
+
+わー！？
+
+！！！！！！！
 `
     const expected = {
       type: 'doc',
@@ -312,7 +324,44 @@ boo
             { type: 'text', contents: '（なんだかな）' },
             { type: 'text', contents: 'と思った。' }
           ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'あー！　' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'えー？　' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'うー？　' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'おー！　' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'わー！？　' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: '！！！！！！！　' }
+          ]
         }
+
       ]
     }
     expect(parse(input)).toStrictEqual(expected)
