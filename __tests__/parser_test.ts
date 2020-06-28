@@ -76,6 +76,17 @@ boo
 はぁ。
 「ちょっと！待ってよ！」
 と言った。
+
+ああ。（なんだか
+な）と思った。
+
+ああ。
+（なんだ？かな？）
+と思った。
+
+ああ。
+（なんだかな）
+と思った。
 `
     const expected = {
       type: 'doc',
@@ -276,6 +287,30 @@ boo
             { type: 'text', contents: 'はぁ。' },
             { type: 'text', contents: '「ちょっと！　待ってよ！」' },
             { type: 'text', contents: 'と言った。' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'ああ。（なんだか' },
+            { type: 'thinkend', contents: 'な' },
+            { type: 'text', contents: 'と思った。' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'ああ。' },
+            { type: 'text', contents: '（なんだ？　かな？）' },
+            { type: 'text', contents: 'と思った。' }
+          ]
+        },
+        {
+          type: 'sentence',
+          contents: [
+            { type: 'text', contents: 'ああ。' },
+            { type: 'text', contents: '（なんだかな）' },
+            { type: 'text', contents: 'と思った。' }
           ]
         }
       ]
