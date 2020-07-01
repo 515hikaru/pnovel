@@ -68,7 +68,7 @@ function addLastEmptyLine (content: string) {
 export function transform (content: string) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
-  if (program.debug) console.debug(jsonContent)
+  if (program.debug) console.debug(JSON.stringify(jsonContent))
   return parseEntireDocument(jsonContent)
 }
 

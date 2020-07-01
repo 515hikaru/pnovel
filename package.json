@@ -15,6 +15,10 @@
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5"
   },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "bin": {
     "pnovel": "./bin/pnovel.js"
   },
@@ -34,6 +38,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "babel-jest": "^26.0.1",
+    "codecov": "^3.7.0",
     "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.2",
