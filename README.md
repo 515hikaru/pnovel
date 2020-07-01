@@ -1,4 +1,5 @@
 ![Build](https://github.com/515hikaru/pnovel/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/515hikaru/pnovel/branch/master/graph/badge.svg)](https://codecov.io/gh/515hikaru/pnovel)
 
 [![dockeri.co](https://dockeri.co/image/515hikaru/pnovel)](https://hub.docker.com/r/515hikaru/pnovel)
 
