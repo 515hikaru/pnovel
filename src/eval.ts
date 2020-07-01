@@ -13,6 +13,16 @@ interface Document {
   contents: DocumentBlock[]
 }
 
+function checkAllCommentNode(node: DocumentBlock): boolean {
+  const { contents } = node
+  let allComment = true
+  contents.forEach((element) => {
+    const {type} = node
+    if(type !== 'comment') allComment = false
+  })
+  return allComment
+}
+
 export function parseDocumentToken (node: DocumentToken): string {
   const { type, contents } = node
   switch (type) {
@@ -68,8 +78,11 @@ export function parseEntireDocument (node: Document): string {
     case 'doc': {
       const results: string[] = []
       contents.forEach(element => {
+        if (checkAllCommentNode(element)) {
+          return
+        }
         const text = parseDocumentBlock(element)
-        results.push(text)
+        if (text.length != 0) results.push(text)
       })
       return results.join('\n') + '\n'
     }

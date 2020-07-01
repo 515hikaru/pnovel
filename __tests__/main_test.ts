@@ -48,6 +48,10 @@ def
 
 [[rb:漢字 > ふりがな]]
 と書くとルビがふれる。
+
+% コメント
+
+あああ % コメント
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -58,11 +62,11 @@ def
 　心の中では（うん？　なんだかな？）と思いながらも、ついていくしかなかった。
 　あー！！！！？？
 　あああ
-
 　あああ
 　ああああああ
 [newpage]
 　[[rb:漢字 > ふりがな]]と書くとルビがふれる。
+　あああ
 `
     const result = transform(text)
     expect(result).toBe(expected)
