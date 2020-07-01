@@ -56,14 +56,13 @@ jobs:
       run: |
         npm run generate
         npm run test
-    - uses: codecov/codecov-action@v1
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage/lcov.info
         flags: unittests
-        env_vars: OS
         name: pnove-test
-        fail_ci_if_error: true
 
   build:
     needs: [lint, typecheck]
