@@ -13,12 +13,12 @@ interface Document {
   contents: DocumentBlock[]
 }
 
-function checkAllCommentNode(node: DocumentBlock): boolean {
+function checkAllCommentNode (node: DocumentBlock): boolean {
   const { contents } = node
   let allComment = true
   contents.forEach((element) => {
-    const {type} = node
-    if(type !== 'comment') allComment = false
+    const { type } = element
+    if (type !== 'comment') allComment = false
   })
   return allComment
 }
@@ -82,7 +82,7 @@ export function parseEntireDocument (node: Document): string {
           return
         }
         const text = parseDocumentBlock(element)
-        if (text.length != 0) results.push(text)
+        results.push(text)
       })
       return results.join('\n') + '\n'
     }
