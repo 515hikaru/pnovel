@@ -256,3 +256,4 @@ parser/*
 /main*
 /src/*.js
 .node-version
+.coverage
