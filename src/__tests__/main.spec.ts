@@ -1,4 +1,4 @@
-import { transform } from '../src/main'
+import { transform } from '../main'
 
 describe('test parsing', () => {
   test('normal parsing', () => {
