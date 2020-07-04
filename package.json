@@ -26,8 +26,8 @@
     "generate": "pegjs -o parser/parser.js pnovel.js",
     "prepack": "pegjs -o parser/parser.js pnovel.js && webpack",
     "typecheck": "tsc -p . --noEmit",
-    "lint": "eslint src/*.ts",
-    "fix": "eslint --fix **/*.ts",
+    "lint": "eslint src/*.ts src/__tests__/*.spec.ts",
+    "fix": "eslint --fix src/*.ts src/__tests__/*.spec.ts",
     "start": "node dist/main.js",
     "test": "npm run generate && jest",
     "build": "webpack"
