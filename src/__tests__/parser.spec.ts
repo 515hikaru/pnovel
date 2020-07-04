@@ -1,5 +1,5 @@
 // @ts-ignore
-import { parse } from '../..//parser/parser'
+import { parse } from '../../parser/parser'
 
 describe('parser', () => {
   test('parse testing', () => {
