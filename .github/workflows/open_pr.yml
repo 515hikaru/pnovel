@@ -12,4 +12,6 @@ jobs:
         with:
           project: pnovel development
           column: In progress
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: $GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
