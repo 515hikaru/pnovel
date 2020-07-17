@@ -52,6 +52,9 @@ def
 % コメント
 
 あああ % コメント
+
+
+あいうえお
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -68,6 +71,7 @@ def
 [newpage]
 　[[rb:漢字 > ふりがな]]と書くとルビがふれる。
 　あああ
+　あいうえお
 `
     const result = transform(text)
     expect(result).toBe(expected)
