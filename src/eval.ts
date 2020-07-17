@@ -66,6 +66,9 @@ function parseDocumentBlock (node: DocumentBlock): string {
     case 'header': {
       return `[chapter:${results.join()}]`
     }
+    case 'break': {
+      return ''
+    }
     default: {
       return results.join('')
     }
