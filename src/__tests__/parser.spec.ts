@@ -99,6 +99,9 @@ boo
 わー！？
 
 ！！！！！！！
+
+
+あいうえお
 `
     const expected = {
       type: 'doc',
@@ -360,8 +363,18 @@ boo
           contents: [
             { type: 'text', contents: '！！！！！！！　' }
           ]
+        },
+        {
+          type: 'break',
+          contents: []
+        },
+        {
+          type: 'sentence',
+          contents: [{
+            type: 'text',
+            contents: 'あいうえお'
+          }]
         }
-
       ]
     }
     expect(parse(input)).toStrictEqual(expected)
