@@ -57,6 +57,12 @@ def
 あいうえお
 
 \`ざあ　　ざ　　あ！あ\`
+
+% コメント
+「あああ」
+
+% コメントセカンドシーズン
+（あああ）
 `
     const expected = `　ａｂｃｄｅｆ
 　ａａａ
@@ -75,6 +81,8 @@ def
 　あああ
 　あいうえお
 ざあ　　ざ　　あ！あ
+「あああ」
+（あああ）
 `
     const result = transform(text)
     expect(result).toBe(expected)

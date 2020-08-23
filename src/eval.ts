@@ -13,22 +13,29 @@ interface Document {
   contents: DocumentBlock[]
 }
 
-function checkAllCommentNode (node: DocumentBlock): boolean {
-  const { contents } = node
-  let allComment = true
+function excludeCommentNode (node: DocumentBlock): DocumentBlock {
+  const { type, contents } = node
+  const newContents: DocumentToken[] = []
   contents.forEach((element) => {
-    const { type } = element
-    if (type !== 'comment') allComment = false
+    const { type, contents } = element
+    if (type !== 'comment') newContents.push({ type, contents })
   })
-  return allComment
+  if (newContents.length === 0) return { type: 'sentence', contents: [] }
+  if (type !== 'sentence') return { type: type, contents: newContents }
+  if (newContents[0].contents[0] === '（') return { type: 'thinking', contents: trimFirstSymbol(newContents) }
+  if (newContents[0].contents[0] === '「') return { type: 'speaking', contents: trimFirstSymbol(newContents) }
+  return { type: type, contents: newContents }
+}
+
+function trimFirstSymbol (tokens: DocumentToken[]): DocumentToken[] {
+  const head = tokens[0]
+  head.contents = head.contents.slice(1)
+  return tokens
 }
 
 export function parseDocumentToken (node: DocumentToken): string {
   const { type, contents } = node
   switch (type) {
-    case 'comment': {
-      return ''
-    }
     case 'speechend': {
       return contents + '」'
     }
@@ -81,10 +88,11 @@ export function parseEntireDocument (node: Document): string {
     case 'doc': {
       const results: string[] = []
       contents.forEach(element => {
-        if (checkAllCommentNode(element)) {
+        const filterBlocks = excludeCommentNode(element)
+        if (filterBlocks.contents.length === 0) {
           return
         }
-        const text = parseDocumentBlock(element)
+        const text = parseDocumentBlock(filterBlocks)
         results.push(text)
       })
       return results.join('\n') + '\n'
