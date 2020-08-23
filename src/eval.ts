@@ -22,17 +22,20 @@ function excludeCommentNode (node: DocumentBlock): DocumentBlock {
   })
   if (newContents.length === 0) return { type: 'sentence', contents: [] }
   if (type !== 'sentence') return { type: type, contents: newContents }
-  if (newContents[0].contents[0] === '（') return { type: 'thinking', contents: newContents }
-  if (newContents[0].contents[0] === '「') return { type: 'speaking', contents: newContents }
+  if (newContents[0].contents[0] === '（') return { type: 'thinking', contents: trimFirstSymbol(newContents) }
+  if (newContents[0].contents[0] === '「') return { type: 'speaking', contents: trimFirstSymbol(newContents) }
   return { type: type, contents: newContents }
+}
+
+function trimFirstSymbol (tokens: DocumentToken[]): DocumentToken[] {
+  const head = tokens[0]
+  head.contents = head.contents.slice(1)
+  return tokens
 }
 
 export function parseDocumentToken (node: DocumentToken): string {
   const { type, contents } = node
   switch (type) {
-    case 'comment': {
-      return ''
-    }
     case 'speechend': {
       return contents + '」'
     }
