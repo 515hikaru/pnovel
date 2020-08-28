@@ -1,32 +1,32 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import * as process from 'process'
+import * as fs from "fs"
+import * as path from "path"
+import * as process from "process"
 
-import { Command } from 'commander'
+import { Command } from "commander"
 
 // @ts-ignore
-import { parse } from '../parser/parser'
-import { parseEntireDocument } from './eval'
+import { parse } from "../parser/parser"
+import { parseEntireDocument } from "./eval"
 
-const VERSION = 'v0.6.2-dev'
+const VERSION = "v0.6.2-dev"
 
 // https://stackoverflow.com/questions/42056246/node-js-process-stdin-issues-with-typescript-tty-readstream-vs-readablestream
 const stdin: any = process.stdin
 
 const program = new Command()
 
-function initProgram () {
+function initProgram() {
   program
     .version(VERSION)
-    .option('-d, --debug', 'Show a result of parsing')
-    .option('-s, --stdin', 'Read from standard input')
-    .option('-o, --output <file>', 'Place the output into <file>')
+    .option("-d, --debug", "Show a result of parsing")
+    .option("-s, --stdin", "Read from standard input")
+    .option("-o, --output <file>", "Place the output into <file>")
     .parse(process.argv)
 }
 
-function lookUpFile (): string {
+function lookUpFile(): string {
   // look up the file path
-  if (program.stdin) return ''
+  if (program.stdin) return ""
   if (program.args.length === 0) {
     const error = new Error(`pnovel needs a file path.
 $ pnovel <file path>
@@ -43,13 +43,13 @@ $ pnovel <file path>
   return file
 }
 
-function readFile (file: string) {
-  if (program.stdin) return fs.readFileSync(stdin.fd, 'utf-8')
+function readFile(file: string) {
+  if (program.stdin) return fs.readFileSync(stdin.fd, "utf-8")
   const filePath = path.resolve(file)
-  return fs.readFileSync(filePath, 'utf-8')
+  return fs.readFileSync(filePath, "utf-8")
 }
 
-function writeFile (outputPath: string, content: string) {
+function writeFile(outputPath: string, content: string) {
   content = addLastEmptyLine(content)
   try {
     fs.writeFileSync(outputPath, content)
@@ -58,23 +58,23 @@ function writeFile (outputPath: string, content: string) {
   }
 }
 
-function addLastEmptyLine (content: string) {
-  if (content.slice(-1) !== '\n') {
-    content += '\n'
+function addLastEmptyLine(content: string) {
+  if (content.slice(-1) !== "\n") {
+    content += "\n"
   }
   return content
 }
 
-export function transform (content: string) {
+export function transform(content: string) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(JSON.stringify(jsonContent))
   return parseEntireDocument(jsonContent)
 }
 
-export function main () {
+export function main() {
   initProgram()
-  let file = ''
+  let file = ""
   try {
     file = lookUpFile()
   } catch (e) {
