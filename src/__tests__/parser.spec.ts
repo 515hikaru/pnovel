@@ -1,8 +1,8 @@
 // @ts-ignore
-import { parse } from '../../parser/parser'
+import { parse } from "../../parser/parser"
 
-describe('parser', () => {
-  test('parse testing', () => {
+describe("parser", () => {
+  test("parse testing", () => {
     const input = `abc
 def
 
@@ -104,278 +104,236 @@ boo
 あいうえお
 `
     const expected = {
-      type: 'doc',
+      type: "doc",
       contents: [
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'text', contents: 'ａｂｃ' },
-            { type: 'text', contents: 'ｄｅｆ' }
-          ]
+            { type: "text", contents: "ａｂｃ" },
+            { type: "text", contents: "ｄｅｆ" },
+          ],
         },
         {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'ａａａ' }
-          ]
+          type: "sentence",
+          contents: [{ type: "text", contents: "ａａａ" }],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'text', contents: 'こんにちは' },
-            { type: 'comment', contents: 'こんにちは' },
-            { type: 'text', contents: 'こんばんは' }
-          ]
+            { type: "text", contents: "こんにちは" },
+            { type: "comment", contents: "こんにちは" },
+            { type: "text", contents: "こんばんは" },
+          ],
         },
         {
-          type: 'speaking',
+          type: "speaking",
           contents: [
-            { type: 'speechend', contents: 'こんにちは' },
-            { type: 'comment', contents: 'あいさつ' }
-          ]
+            { type: "speechend", contents: "こんにちは" },
+            { type: "comment", contents: "あいさつ" },
+          ],
         },
         {
-          type: 'speaking',
+          type: "speaking",
           contents: [
-            { type: 'text', contents: 'こんにち' },
-            { type: 'speechend', contents: 'は' },
-            { type: 'comment', contents: 'あいさつつ' }
-          ]
+            { type: "text", contents: "こんにち" },
+            { type: "speechend", contents: "は" },
+            { type: "comment", contents: "あいさつつ" },
+          ],
         },
         {
-          type: 'thinking',
+          type: "thinking",
           contents: [
-            { type: 'text', contents: 'どうか' },
-            { type: 'thinkend', contents: 'な' }
-          ]
+            { type: "text", contents: "どうか" },
+            { type: "thinkend", contents: "な" },
+          ],
         },
         {
-          type: 'thinking',
-          contents: [
-            { type: 'thinkend', contents: 'どうだろう' }
-          ]
+          type: "thinking",
+          contents: [{ type: "thinkend", contents: "どうだろう" }],
         },
 
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: '$  ふふふ &%' },
-            { type: 'text', contents: 'ほげほげ' }
-          ]
+            { type: "raw", contents: "$  ふふふ &%" },
+            { type: "text", contents: "ほげほげ" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: '$  ふふふ &%' },
-            { type: 'text', contents: 'ほげほげ' }
-          ]
+            { type: "raw", contents: "$  ふふふ &%" },
+            { type: "text", contents: "ほげほげ" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
+          contents: [{ type: "raw", contents: "aa\naaaaa\nhogefugabar" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "raw", contents: "aaa" }],
+        },
+        {
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: 'aa\naaaaa\nhogefugabar' }
-          ]
+            { type: "raw", contents: "aaa" },
+            { type: "text", contents: "ｂｂｂ１２３" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: 'aaa' }
-          ]
+            { type: "text", contents: "ａａ" },
+            { type: "raw", contents: "aaa123" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
+          contents: [{ type: "raw", contents: "[chapter:foo]" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "raw", contents: "[newpage]" }],
+        },
+        {
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: 'aaa' },
-            { type: 'text', contents: 'ｂｂｂ１２３' }
-          ]
+            { type: "text", contents: "ｈｏｇｅ" },
+            { type: "break", contents: [] },
+            { type: "text", contents: "ｆｕｇａ" },
+            { type: "break", contents: [] },
+            { type: "text", contents: "ｂａｒ" },
+            { type: "break", contents: [] },
+            { type: "text", contents: "ｂｏｏ" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
+          contents: [{ type: "break", contents: [] }],
+        },
+        {
+          type: "speaking",
+          contents: [{ type: "speechend", contents: "あ！　こんにちは" }],
+        },
+        {
+          type: "speaking",
+          contents: [{ type: "speechend", contents: "え？　そうですか" }],
+        },
+        {
+          type: "speaking",
+          contents: [{ type: "speechend", contents: "あ！　こんにちは" }],
+        },
+        {
+          type: "speaking",
+          contents: [{ type: "speechend", contents: "え？　そうですか" }],
+        },
+        {
+          type: "speaking",
+          contents: [{ type: "speechend", contents: "あ！　こんにちは！" }],
+        },
+        {
+          type: "speaking",
+          contents: [{ type: "speechend", contents: "え？　そうですか？" }],
+        },
+        {
+          type: "thinking",
+          contents: [{ type: "thinkend", contents: "うーん？　こんにちは？" }],
+        },
+        {
+          type: "thinking",
+          contents: [{ type: "thinkend", contents: "あ！　そうだった！" }],
+        },
+        {
+          type: "header",
+          contents: [{ type: "text", contents: "見出し" }],
+        },
+        {
+          type: "sentence",
           contents: [
-            { type: 'text', contents: 'ａａ' },
-            { type: 'raw', contents: 'aaa123' }
-          ]
+            { type: "text", contents: "はぁ。「ちょっと待って" },
+            { type: "speechend", contents: "よ" },
+            { type: "text", contents: "と言った。" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: '[chapter:foo]' }
-          ]
+            { type: "text", contents: "はぁ。" },
+            { type: "text", contents: "「ちょっと待ってよ」" },
+            { type: "text", contents: "と言った。" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'raw', contents: '[newpage]' }
-          ]
+            { type: "text", contents: "はぁ。" },
+            { type: "text", contents: "「ちょっと！　待ってよ！」" },
+            { type: "text", contents: "と言った。" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'text', contents: 'ｈｏｇｅ' },
-            { type: 'break', contents: [] },
-            { type: 'text', contents: 'ｆｕｇａ' },
-            { type: 'break', contents: [] },
-            { type: 'text', contents: 'ｂａｒ' },
-            { type: 'break', contents: [] },
-            { type: 'text', contents: 'ｂｏｏ' }
-          ]
+            { type: "text", contents: "ああ。（なんだか" },
+            { type: "thinkend", contents: "な" },
+            { type: "text", contents: "と思った。" },
+          ],
         },
         {
-          type: 'sentence',
+          type: "sentence",
           contents: [
-            { type: 'break', contents: [] }
-          ]
+            { type: "text", contents: "ああ。" },
+            { type: "text", contents: "（なんだ？　かな？）" },
+            { type: "text", contents: "と思った。" },
+          ],
         },
         {
-          type: 'speaking',
+          type: "sentence",
           contents: [
-            { type: 'speechend', contents: 'あ！　こんにちは' }
-          ]
+            { type: "text", contents: "ああ。" },
+            { type: "text", contents: "（なんだかな）" },
+            { type: "text", contents: "と思った。" },
+          ],
         },
         {
-          type: 'speaking',
+          type: "sentence",
+          contents: [{ type: "text", contents: "あー！　" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "text", contents: "えー？　" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "text", contents: "うー？　" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "text", contents: "おー！　" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "text", contents: "わー！？　" }],
+        },
+        {
+          type: "sentence",
+          contents: [{ type: "text", contents: "！！！！！！！　" }],
+        },
+        {
+          type: "break",
+          contents: [],
+        },
+        {
+          type: "sentence",
           contents: [
-            { type: 'speechend', contents: 'え？　そうですか' }
-          ]
+            {
+              type: "text",
+              contents: "あいうえお",
+            },
+          ],
         },
-        {
-          type: 'speaking',
-          contents: [
-            { type: 'speechend', contents: 'あ！　こんにちは' }
-          ]
-        },
-        {
-          type: 'speaking',
-          contents: [
-            { type: 'speechend', contents: 'え？　そうですか' }
-          ]
-        },
-        {
-          type: 'speaking',
-          contents: [
-            { type: 'speechend', contents: 'あ！　こんにちは！' }
-          ]
-        },
-        {
-          type: 'speaking',
-          contents: [
-            { type: 'speechend', contents: 'え？　そうですか？' }
-          ]
-        },
-        {
-          type: 'thinking',
-          contents: [
-            { type: 'thinkend', contents: 'うーん？　こんにちは？' }
-          ]
-        },
-        {
-          type: 'thinking',
-          contents: [
-            { type: 'thinkend', contents: 'あ！　そうだった！' }
-          ]
-        },
-        {
-          type: 'header',
-          contents: [
-            { type: 'text', contents: '見出し' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'はぁ。「ちょっと待って' },
-            { type: 'speechend', contents: 'よ' },
-            { type: 'text', contents: 'と言った。' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'はぁ。' },
-            { type: 'text', contents: '「ちょっと待ってよ」' },
-            { type: 'text', contents: 'と言った。' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'はぁ。' },
-            { type: 'text', contents: '「ちょっと！　待ってよ！」' },
-            { type: 'text', contents: 'と言った。' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'ああ。（なんだか' },
-            { type: 'thinkend', contents: 'な' },
-            { type: 'text', contents: 'と思った。' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'ああ。' },
-            { type: 'text', contents: '（なんだ？　かな？）' },
-            { type: 'text', contents: 'と思った。' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'ああ。' },
-            { type: 'text', contents: '（なんだかな）' },
-            { type: 'text', contents: 'と思った。' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'あー！　' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'えー？　' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'うー？　' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'おー！　' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: 'わー！？　' }
-          ]
-        },
-        {
-          type: 'sentence',
-          contents: [
-            { type: 'text', contents: '！！！！！！！　' }
-          ]
-        },
-        {
-          type: 'break',
-          contents: []
-        },
-        {
-          type: 'sentence',
-          contents: [{
-            type: 'text',
-            contents: 'あいうえお'
-          }]
-        }
-      ]
+      ],
     }
     expect(parse(input)).toStrictEqual(expected)
   })

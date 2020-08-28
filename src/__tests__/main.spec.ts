@@ -1,21 +1,21 @@
-import { transform } from '../main'
+import { transform } from "../main"
 
-describe('test parsing', () => {
-  test('normal parsing', () => {
-    const text = 'foo\n'
-    const expected = '　ｆｏｏ\n'
+describe("test parsing", () => {
+  test("normal parsing", () => {
+    const text = "foo\n"
+    const expected = "　ｆｏｏ\n"
     const result = transform(text)
     expect(result).toBe(expected)
   })
 
-  test('do not have last newline', () => {
-    const text = 'foo'
-    const expected = '　ｆｏｏ\n'
+  test("do not have last newline", () => {
+    const text = "foo"
+    const expected = "　ｆｏｏ\n"
     const result = transform(text)
     expect(result).toBe(expected)
   })
 
-  test('using sample string for testing parser', () => {
+  test("using sample string for testing parser", () => {
     const text = `abc
 def
 
