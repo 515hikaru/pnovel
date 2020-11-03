@@ -57,7 +57,7 @@ content = newLineToken / pixivRubyToken / specialToken / rawBlock / rawToken / c
 text = _ text:contentChars _ blank? {
   return {type: "text", contents: text}
 }
-comment = _ "%" _ text:[^\n]+ _ blank {
+comment = _ "%" _ text:[^\n]* _ blank {
   return {type: "comment", contents: text.join("")}
 }
 
