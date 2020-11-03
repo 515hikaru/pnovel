@@ -102,6 +102,9 @@ boo
 
 
 あいうえお
+
+%
+あいうえお
 `
     const expected = {
       type: "doc",
@@ -327,6 +330,19 @@ boo
         {
           type: "sentence",
           contents: [
+            {
+              type: "text",
+              contents: "あいうえお",
+            },
+          ],
+        },
+        {
+          type: "sentence",
+          contents: [
+            {
+              type: "comment",
+              contents: "",
+            },
             {
               type: "text",
               contents: "あいうえお",
