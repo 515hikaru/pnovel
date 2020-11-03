@@ -17,7 +17,14 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ]
   },
   "bin": {
     "pnovel": "./bin/pnovel.js"
@@ -29,7 +36,7 @@
     "lint": "eslint src/*.ts src/__tests__/*.spec.ts",
     "fix": "eslint --fix src/*.ts src/__tests__/*.spec.ts",
     "start": "node dist/main.js",
-    "test": "npm run generate && jest",
+    "test": "npm run generate && jest --coverage",
     "build": "webpack"
   },
   "devDependencies": {
