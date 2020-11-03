@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './src/main.ts',
-  target: 'node',
-  mode: 'production',
+  entry: "./src/main.ts",
+  target: "node",
+  mode: "production",
   module: {
     rules: [
       {
@@ -11,12 +11,12 @@ module.exports = {
           loader: "ts-loader",
           options: {
             transpileOnly: true,
-          }
-        }
-      }
-    ]
+          },
+        },
+      },
+    ],
   },
   resolve: {
-    extensions: [ '.js', '.ts' ]
-  }
-};
+    extensions: [".js", ".ts"],
+  },
+}

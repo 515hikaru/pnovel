@@ -22,4 +22,4 @@ module.exports = {
     "space-before-function-paren": ["error", "never"],
   },
   plugins: ["@typescript-eslint", "jest"],
-};
+}
