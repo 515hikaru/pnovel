@@ -52,6 +52,7 @@
     "prettier": "^2.1.2",
     "ts-jest": "^26.4.3",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "mock-argv": "^1.1.8"
   }
 }

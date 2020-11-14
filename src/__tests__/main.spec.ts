@@ -1,4 +1,22 @@
-import { transform } from "../main"
+import * as fs from "fs"
+import * as path from "path"
+
+// @ts-ignore
+import mockArgv from "mock-argv"
+
+import { transform, main } from "../main"
+
+describe("test main", () => {
+  test("main", () => {
+    mockArgv(["testdata/sample.pnovel", "-o", "output.txt"], () => {
+      main()
+    })
+    const filePath = path.resolve("output.txt")
+    const fileContent = fs.readFileSync(filePath, "utf-8")
+    const expected = "　あ\n"
+    expect(fileContent).toBe(expected)
+  })
+})
 
 describe("test parsing", () => {
   test("normal parsing", () => {

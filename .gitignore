@@ -257,3 +257,4 @@ parser/*
 /src/*.js
 .node-version
 .coverage
+output.txt
