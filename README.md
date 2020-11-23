@@ -12,6 +12,10 @@
 npx pnovel main.pnovel
 ```
 
+## 言語仕様
+
+[言語仕様ドキュメント](docs/parser.md)を参照。
+
 # LICENSE
 
 MIT License
