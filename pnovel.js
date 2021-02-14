@@ -37,7 +37,6 @@ block = blank / header / emptyHeader / speaking / thinking / sentence
 
 // 見出しは1行
 header = "#" _ content:content+ _ blank? {
-  console.log('content:', content)
   return {type: "header", contents: content}
 }
 
