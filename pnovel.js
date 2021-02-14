@@ -69,12 +69,12 @@ rawToken = "`" text:[^\n"`"]+ "`" _ blank? {
   return {type: "raw", contents: text.join("")}
 }
 
-rawBlock = _ "```" blank? text:([^\n"`"]+ blank?)+ _ blank? _ "```" blank? {
+rawBlock = _ "```" blank? text:([^"`"]+ blank?)+ _ blank? _ "```" blank? {
   const lines = []
   text.forEach(line => {
     lines.push(line[0].join(""))
   });
-  return {type: "raw", contents: lines.join("\n")}
+  return {type: "raw", contents: lines.join("\n").trim()}
 }
 
 specialToken = _ "[" text:[^\]\n]+ "]" _ blank? {

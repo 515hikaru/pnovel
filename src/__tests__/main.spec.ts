@@ -40,6 +40,25 @@ describe("test parsing", () => {
     expect(result).toBe(expected)
   })
 
+  test("raw block", () => {
+    const text1 = `\`\`\`あああ
+あああ
+あああ\`\`\`
+`
+    const text2 = `\`\`\`
+あああ
+あああ
+あああ
+\`\`\``
+    const expected = `あああ
+あああ
+あああ\n`
+    const result1 = transform(text1)
+    const result2 = transform(text2)
+    expect(result1).toBe(expected)
+    expect(result2).toBe(expected)
+  })
+
   test("using sample string for testing parser", () => {
     const text = `abc
 def
