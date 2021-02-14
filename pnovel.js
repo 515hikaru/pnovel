@@ -33,11 +33,15 @@ doc = block:block+ {
   return { type: "doc", contents: block }
 }
 
-block = blank / header / speaking / thinking / sentence 
+block = blank / header / emptyHeader / speaking / thinking / sentence 
 
 // 見出しは1行
 header = "#" _ content:content+ _ blank? {
   return {type: "header", contents: content}
+}
+
+emptyHeader = "#" blank? {
+  return {type: "sentence", contents: [{ type: 'text', contents: '#'}]}
 }
 
 speaking = _ "「" _ content:content+  blank? {

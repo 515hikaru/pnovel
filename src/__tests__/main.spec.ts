@@ -33,6 +33,13 @@ describe("test parsing", () => {
     expect(result).toBe(expected)
   })
 
+  test("only sharp symbol line", () => {
+    const text = "#"
+    const expected = "　#\n"
+    const result = transform(text)
+    expect(result).toBe(expected)
+  })
+
   test("using sample string for testing parser", () => {
     const text = `abc
 def

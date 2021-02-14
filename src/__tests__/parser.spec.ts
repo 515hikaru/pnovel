@@ -105,6 +105,8 @@ boo
 
 %
 あいうえお
+
+#
 `
     const expected = {
       type: "doc",
@@ -346,6 +348,15 @@ boo
             {
               type: "text",
               contents: "あいうえお",
+            },
+          ],
+        },
+        {
+          type: "sentence",
+          contents: [
+            {
+              type: "text",
+              contents: "#",
             },
           ],
         },
