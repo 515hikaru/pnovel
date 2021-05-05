@@ -8,7 +8,7 @@ import { Command } from "commander"
 import { parse } from "../parser/parser"
 import { parseEntireDocument } from "./eval"
 
-const VERSION = "v0.6.7"
+const VERSION = "v0.6.8-dev"
 
 // https://stackoverflow.com/questions/42056246/node-js-process-stdin-issues-with-typescript-tty-readstream-vs-readablestream
 const stdin: any = process.stdin
