@@ -134,4 +134,100 @@ def
     const result = transform(text, "pixiv")
     expect(result).toBe(expected)
   })
+
+  test("narou toransformer", () => {
+    const text = "# foo\n"
+    const expected = "\nｆｏｏ\n\n"
+    const result = transform(text, "narou")
+    expect(result).toBe(expected)
+  })
+
+  test("narou toransformer: ignore pixivToken", () => {
+    const text = "[newpage]"
+    const expected = "\n"
+    const result = transform(text, "narou")
+    expect(result).toBe(expected)
+  })
+
+  test("narou toransformer dpcument", () => {
+    const text = `abc
+def
+
+    aaa
+
+こんにちは。 % こんにちは
+こんばんは
+
+「こんにちは」  % あいさつ
+
+# 見出し
+
+# み\`　\`だ\` \`し
+
+はぁ。「ちょっと待って
+よ」と言った。
+
+心の中では（うん？なんだかな？）と思い
+ながらも、ついていくしかなかった。
+
+あー！!!!??
+
+あああ
+
+[newline]
+
+あああ
+
+あああ\`あああ　\`
+
+[newpage]
+
+[[rb:漢字 > ふりがな]]
+と書くとルビがふれる。
+
+% コメント
+
+あああ % コメント
+
+
+あいうえお
+
+\`ざあ　　ざ　　あ！あ\`
+
+% コメント
+「あああ」
+
+% コメントセカンドシーズン
+（あああ）
+`
+    const expected = `　ａｂｃｄｅｆ
+　ａａａ
+　こんにちは。こんばんは
+「こんにちは」
+
+見出し
+
+
+み　だ し
+
+　はぁ。「ちょっと待ってよ」と言った。
+　心の中では（うん？　なんだかな？）と思いながらも、ついていくしかなかった。
+　あー！！！！？？
+　あああ
+
+　あああ
+　ああああああ
+
+　[[rb:漢字 > ふりがな]]と書くとルビがふれる。
+　あああ
+　あいうえお
+ざあ　　ざ　　あ！あ
+「あああ」
+（あああ）
+`
+    const result = transform(text, "narou")
+    console.log(JSON.stringify(expected))
+    console.log(JSON.stringify(result))
+    expect(result).toBe(expected)
+  })
 })

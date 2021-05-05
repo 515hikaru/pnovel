@@ -49,7 +49,7 @@ export class NarouSyosetsuTransformer {
         return "（" + results.join("")
       }
       case "header": {
-        return `\n${results.join("")}]\n`
+        return `\n${results.join("")}\n`
       }
       case "break": {
         return ""

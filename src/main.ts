@@ -84,6 +84,7 @@ export function transform(content: string, mode: Mode) {
       break
     default:
       transformer = new NarouSyosetsuTransformer(jsonContent)
+      break
   }
   return transformer.transform()
 }
