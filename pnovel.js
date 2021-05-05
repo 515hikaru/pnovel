@@ -78,7 +78,7 @@ rawBlock = _ "```" blank? text:([^"`"]+ blank?)+ _ blank? _ "```" blank? {
 }
 
 specialToken = _ "[" text:[^\]\n]+ "]" _ blank? {
-  return {type: "raw", contents: "[" + text.join("") + "]"}
+  return {type: "pixivToken", contents: "[" + text.join("") + "]"}
 }
 
 pixivRubyToken = _ "[" "[" text:[^\]\n]+ "]" "]" _ blank? {

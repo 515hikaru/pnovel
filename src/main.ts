@@ -6,9 +6,12 @@ import { Command } from "commander"
 
 // @ts-ignore
 import { parse } from "../parser/parser"
-import { parseEntireDocument } from "./eval"
+import { PixivNovelTransformer } from "./pixivNovelTransformer"
+import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer"
 
 const VERSION = "v0.6.8-dev"
+
+type Mode = "pixiv" | "narou"
 
 // https://stackoverflow.com/questions/42056246/node-js-process-stdin-issues-with-typescript-tty-readstream-vs-readablestream
 const stdin: any = process.stdin
@@ -21,7 +24,12 @@ function initProgram() {
     .option("-d, --debug", "Show a result of parsing")
     .option("-s, --stdin", "Read from standard input")
     .option("-o, --output <file>", "Place the output into <file>")
+    .option("-m, --mode <type>", "Format of novel", "pixiv")
     .parse(process.argv)
+
+  if (!["pixiv", "narou"].includes(program.mode)) {
+    throw new Error(`No such mode: ${program.mode}`)
+  }
 }
 
 function lookUpFile(): string {
@@ -65,25 +73,39 @@ function addLastEmptyLine(content: string) {
   return content
 }
 
-export function transform(content: string) {
+export function transform(content: string, mode: Mode) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(JSON.stringify(jsonContent))
-  return parseEntireDocument(jsonContent)
+  let transformer
+  switch (mode) {
+    case "pixiv":
+      transformer = new PixivNovelTransformer(jsonContent)
+      break
+    default:
+      transformer = new NarouSyosetsuTransformer(jsonContent)
+      break
+  }
+  return transformer.transform()
 }
 
 export function main() {
-  initProgram()
+  try {
+    initProgram()
+  } catch (e) {
+    console.error(e.message)
+    process.exit(1)
+  }
   let file = ""
   try {
     file = lookUpFile()
   } catch (e) {
-    console.log(e.message)
-    return
+    console.error(e.message)
+    process.exit(1)
   }
 
   const fileContent = readFile(file)
-  const transformedContent = transform(fileContent)
+  const transformedContent = transform(fileContent, program.mode)
   if (program.output) {
     writeFile(program.output, transformedContent)
     return

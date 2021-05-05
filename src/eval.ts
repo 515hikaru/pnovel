@@ -8,12 +8,7 @@ interface DocumentBlock {
   contents: DocumentToken[]
 }
 
-interface Document {
-  type: string
-  contents: DocumentBlock[]
-}
-
-function excludeCommentNode(node: DocumentBlock): DocumentBlock {
+export function excludeCommentNode(node: DocumentBlock): DocumentBlock {
   const { type, contents } = node
   const newContents: DocumentToken[] = []
   contents.forEach((element) => {
@@ -48,60 +43,5 @@ export function parseDocumentToken(node: DocumentToken): string {
     }
     default:
       return contents
-  }
-}
-
-function parseDocumentBlock(node: DocumentBlock): string {
-  const { type, contents } = node
-  const results: string[] = []
-  contents.forEach((element) => {
-    results.push(parseDocumentToken(element))
-  })
-  switch (type) {
-    case "sentence": {
-      let text = ""
-      if (contents[0].type === "raw") {
-        text = results.join("")
-      } else {
-        text = "　" + results.join("")
-      }
-      if (text.slice(-1)[0] === "　") return text.slice(0, text.length - 1)
-      return text
-    }
-    case "speaking": {
-      return "「" + results.join("")
-    }
-    case "thinking": {
-      return "（" + results.join("")
-    }
-    case "header": {
-      return `[chapter:${results.join("")}]`
-    }
-    case "break": {
-      return ""
-    }
-    default: {
-      return results.join("")
-    }
-  }
-}
-
-export function parseEntireDocument(node: Document): string {
-  const { type, contents } = node
-  switch (type) {
-    case "doc": {
-      const results: string[] = []
-      contents.forEach((element) => {
-        const filterBlocks = excludeCommentNode(element)
-        if (filterBlocks.contents.length === 0) {
-          return
-        }
-        const text = parseDocumentBlock(filterBlocks)
-        results.push(text)
-      })
-      return results.join("\n") + "\n"
-    }
-    default:
-      return ""
   }
 }
