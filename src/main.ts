@@ -21,7 +21,12 @@ function initProgram() {
     .option("-d, --debug", "Show a result of parsing")
     .option("-s, --stdin", "Read from standard input")
     .option("-o, --output <file>", "Place the output into <file>")
+    .option("-m, --mode <type>", "Format of novel", "pixiv")
     .parse(process.argv)
+
+  if (!["pixiv", "narou"].includes(program.mode)) {
+    throw new Error(`No such mode: ${program.mode}`)
+  }
 }
 
 function lookUpFile(): string {
@@ -69,17 +74,22 @@ export function transform(content: string) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(JSON.stringify(jsonContent))
-  return parseEntireDocument(jsonContent)
+  return parseEntireDocument(jsonContent, program.mode)
 }
 
 export function main() {
-  initProgram()
+  try {
+    initProgram()
+  } catch (e) {
+    console.error(e.message)
+    process.exit(1)
+  }
   let file = ""
   try {
     file = lookUpFile()
   } catch (e) {
-    console.log(e.message)
-    return
+    console.error(e.message)
+    process.exit(1)
   }
 
   const fileContent = readFile(file)
