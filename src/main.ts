@@ -7,8 +7,11 @@ import { Command } from "commander"
 // @ts-ignore
 import { parse } from "../parser/parser"
 import { PixivNovelTransformer } from "./pixivNovelTransformer"
+import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer"
 
 const VERSION = "v0.6.8-dev"
+
+type Mode = "pixiv" | "narou"
 
 // https://stackoverflow.com/questions/42056246/node-js-process-stdin-issues-with-typescript-tty-readstream-vs-readablestream
 const stdin: any = process.stdin
@@ -70,11 +73,18 @@ function addLastEmptyLine(content: string) {
   return content
 }
 
-export function transform(content: string) {
+export function transform(content: string, mode: Mode) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(JSON.stringify(jsonContent))
-  const transformer = new PixivNovelTransformer(jsonContent)
+  let transformer
+  switch (mode) {
+    case "pixiv":
+      transformer = new PixivNovelTransformer(jsonContent)
+      break
+    default:
+      transformer = new NarouSyosetsuTransformer(jsonContent)
+  }
   return transformer.transform()
 }
 
@@ -94,7 +104,7 @@ export function main() {
   }
 
   const fileContent = readFile(file)
-  const transformedContent = transform(fileContent)
+  const transformedContent = transform(fileContent, program.mode)
   if (program.output) {
     writeFile(program.output, transformedContent)
     return

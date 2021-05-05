@@ -22,21 +22,21 @@ describe("test parsing", () => {
   test("normal parsing", () => {
     const text = "foo\n"
     const expected = "　ｆｏｏ\n"
-    const result = transform(text)
+    const result = transform(text, "pixiv")
     expect(result).toBe(expected)
   })
 
   test("do not have last newline", () => {
     const text = "foo"
     const expected = "　ｆｏｏ\n"
-    const result = transform(text)
+    const result = transform(text, "pixiv")
     expect(result).toBe(expected)
   })
 
   test("only sharp symbol line", () => {
     const text = "#"
     const expected = "　#\n"
-    const result = transform(text)
+    const result = transform(text, "pixiv")
     expect(result).toBe(expected)
   })
 
@@ -53,8 +53,8 @@ describe("test parsing", () => {
     const expected = `あああ
 あああ
 あああ\n`
-    const result1 = transform(text1)
-    const result2 = transform(text2)
+    const result1 = transform(text1, "pixiv")
+    const result2 = transform(text2, "pixiv")
     expect(result1).toBe(expected)
     expect(result2).toBe(expected)
   })
@@ -131,7 +131,7 @@ def
 「あああ」
 （あああ）
 `
-    const result = transform(text)
+    const result = transform(text, "pixiv")
     expect(result).toBe(expected)
   })
 })

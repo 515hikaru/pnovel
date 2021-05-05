@@ -1,5 +1,3 @@
-type Mode = "pixiv" | "narou"
-
 interface DocumentToken {
   type: string
   contents: string
@@ -14,7 +12,6 @@ interface Document {
   type: string
   contents: DocumentBlock[]
 }
-
 
 export function excludeCommentNode(node: DocumentBlock): DocumentBlock {
   const { type, contents } = node
