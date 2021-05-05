@@ -8,11 +8,6 @@ interface DocumentBlock {
   contents: DocumentToken[]
 }
 
-interface Document {
-  type: string
-  contents: DocumentBlock[]
-}
-
 export function excludeCommentNode(node: DocumentBlock): DocumentBlock {
   const { type, contents } = node
   const newContents: DocumentToken[] = []
@@ -48,40 +43,5 @@ export function parseDocumentToken(node: DocumentToken): string {
     }
     default:
       return contents
-  }
-}
-
-export function parseDocumentBlock(node: DocumentBlock): string {
-  const { type, contents } = node
-  const results: string[] = []
-  contents.forEach((element) => {
-    results.push(parseDocumentToken(element))
-  })
-  switch (type) {
-    case "sentence": {
-      let text = ""
-      if (contents[0].type === "raw") {
-        text = results.join("")
-      } else {
-        text = "　" + results.join("")
-      }
-      if (text.slice(-1)[0] === "　") return text.slice(0, text.length - 1)
-      return text
-    }
-    case "speaking": {
-      return "「" + results.join("")
-    }
-    case "thinking": {
-      return "（" + results.join("")
-    }
-    case "header": {
-      return `[chapter:${results.join("")}]`
-    }
-    case "break": {
-      return ""
-    }
-    default: {
-      return results.join("")
-    }
   }
 }
