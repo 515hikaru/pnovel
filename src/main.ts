@@ -6,7 +6,7 @@ import { Command } from "commander"
 
 // @ts-ignore
 import { parse } from "../parser/parser"
-import { parseEntireDocument } from "./eval"
+import { PixivNovelTransformer } from "./pixivNovelTransformer"
 
 const VERSION = "v0.6.8-dev"
 
@@ -74,7 +74,8 @@ export function transform(content: string) {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(JSON.stringify(jsonContent))
-  return parseEntireDocument(jsonContent, program.mode)
+  const transformer = new PixivNovelTransformer(jsonContent)
+  return transformer.transform()
 }
 
 export function main() {

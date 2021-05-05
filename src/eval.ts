@@ -1,3 +1,5 @@
+type Mode = "pixiv" | "narou"
+
 interface DocumentToken {
   type: string
   contents: string
@@ -13,7 +15,8 @@ interface Document {
   contents: DocumentBlock[]
 }
 
-function excludeCommentNode(node: DocumentBlock): DocumentBlock {
+
+export function excludeCommentNode(node: DocumentBlock): DocumentBlock {
   const { type, contents } = node
   const newContents: DocumentToken[] = []
   contents.forEach((element) => {
@@ -51,7 +54,7 @@ export function parseDocumentToken(node: DocumentToken): string {
   }
 }
 
-function parseDocumentBlock(node: DocumentBlock): string {
+export function parseDocumentBlock(node: DocumentBlock): string {
   const { type, contents } = node
   const results: string[] = []
   contents.forEach((element) => {
@@ -83,25 +86,5 @@ function parseDocumentBlock(node: DocumentBlock): string {
     default: {
       return results.join("")
     }
-  }
-}
-
-export function parseEntireDocument(node: Document): string {
-  const { type, contents } = node
-  switch (type) {
-    case "doc": {
-      const results: string[] = []
-      contents.forEach((element) => {
-        const filterBlocks = excludeCommentNode(element)
-        if (filterBlocks.contents.length === 0) {
-          return
-        }
-        const text = parseDocumentBlock(filterBlocks)
-        results.push(text)
-      })
-      return results.join("\n") + "\n"
-    }
-    default:
-      return ""
   }
 }

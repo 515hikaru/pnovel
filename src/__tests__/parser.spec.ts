@@ -195,11 +195,11 @@ boo
         },
         {
           type: "sentence",
-          contents: [{ type: "raw", contents: "[chapter:foo]" }],
+          contents: [{ type: "pixivToken", contents: "[chapter:foo]" }],
         },
         {
           type: "sentence",
-          contents: [{ type: "raw", contents: "[newpage]" }],
+          contents: [{ type: "pixivToken", contents: "[newpage]" }],
         },
         {
           type: "sentence",
