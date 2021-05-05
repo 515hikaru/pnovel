@@ -226,8 +226,6 @@ def
 （あああ）
 `
     const result = transform(text, "narou")
-    console.log(JSON.stringify(expected))
-    console.log(JSON.stringify(result))
     expect(result).toBe(expected)
   })
 })
