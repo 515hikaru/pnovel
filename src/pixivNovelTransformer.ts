@@ -1,21 +1,5 @@
-// import type { DocumentToken, DocumentBlock, Document } from "./eval"
+import type { DocumentBlock, Document } from "./eval"
 import { excludeCommentNode, parseDocumentToken } from "./eval"
-// TODO: 2重管理やめる
-// See: https://github.com/benmosher/eslint-plugin-import/pull/1974
-interface DocumentToken {
-  type: string
-  contents: string
-}
-
-interface DocumentBlock {
-  type: string
-  contents: DocumentToken[]
-}
-
-interface Document {
-  type: string
-  contents: DocumentBlock[]
-}
 
 export class PixivNovelTransformer {
   document: Document

@@ -1,21 +1,5 @@
-// import type { DocumentToken, DocumentBlock, Document } from "./eval"
+import type { DocumentBlock, Document } from "./eval"
 import { excludeCommentNode, parseDocumentToken } from "./eval"
-// TODO: 2重管理やめる
-// See: https://github.com/benmosher/eslint-plugin-import/pull/1974
-interface DocumentToken {
-  type: string
-  contents: string
-}
-
-interface DocumentBlock {
-  type: string
-  contents: DocumentToken[]
-}
-
-interface Document {
-  type: string
-  contents: DocumentBlock[]
-}
 
 export class NarouSyosetsuTransformer {
   document: Document
@@ -35,8 +19,7 @@ export class NarouSyosetsuTransformer {
         let text = ""
         if (contents[0].type === "raw") {
           text = results.join("")
-        } else if (contents[0].type === "pixivToken") {
-        } else {
+        } else if (contents[0].type !== "pixivToken") {
           text = "　" + results.join("")
         }
         if (text.slice(-1)[0] === "　") return text.slice(0, text.length - 1)

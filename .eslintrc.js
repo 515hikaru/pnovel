@@ -2,17 +2,17 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es6: true,
+    es2021: true,
     "jest/globals": true,
   },
   parser: "@typescript-eslint/parser",
-  extends: ["standard"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
   },
   parserOptions: {
-    ecmaVersion: 11,
+    ecmaVersion: 12,
   },
   rules: {
     "no-irregular-whitespace": 0,
@@ -20,6 +20,7 @@ module.exports = {
     "comma-dangle": ["warn", "always-multiline"],
     semi: ["error", "never"],
     "space-before-function-paren": ["error", "never"],
+    "@typescript-eslint/ban-ts-comment": "off",
   },
   plugins: ["@typescript-eslint", "jest"],
 }
