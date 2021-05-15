@@ -21,6 +21,7 @@ module.exports = {
     semi: ["error", "never"],
     "space-before-function-paren": ["error", "never"],
     "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": 0,
   },
   plugins: ["@typescript-eslint", "jest"],
 }

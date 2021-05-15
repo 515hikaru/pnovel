@@ -73,7 +73,7 @@ function addLastEmptyLine(content: string) {
   return content
 }
 
-export function transform(content: string, mode: Mode) {
+export function transform(content: string, mode: Mode): string {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
   if (program.debug) console.debug(JSON.stringify(jsonContent))
@@ -89,7 +89,7 @@ export function transform(content: string, mode: Mode) {
   return transformer.transform()
 }
 
-export function main() {
+export function main(): void {
   try {
     initProgram()
   } catch (e) {
