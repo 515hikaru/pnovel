@@ -1,7 +1,6 @@
 import * as fs from "fs"
 import * as path from "path"
 
-// @ts-ignore
 import mockArgv from "mock-argv"
 
 import { transform, main } from "../main"

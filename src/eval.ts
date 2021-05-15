@@ -3,10 +3,16 @@ interface DocumentToken {
   contents: string
 }
 
-interface DocumentBlock {
+export interface DocumentBlock {
   type: string
   contents: DocumentToken[]
 }
+
+export interface Document {
+  type: string
+  contents: DocumentBlock[]
+}
+
 
 export function excludeCommentNode(node: DocumentBlock): DocumentBlock {
   const { type, contents } = node
