@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Docker Login
+        run: echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
       - name: Build Docker Image
         run: |
           docker build --tag ghcr.io/$GITHUB_ACTOR/pnovel:latest \
