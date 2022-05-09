@@ -67,4 +67,4 @@ jobs:
           .
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/$GITHUB_ACTOR/pnovel:${{ github.ref }}
+          docker push ghcr.io/$GITHUB_ACTOR/pnovel:${{ github.ref_name }}
