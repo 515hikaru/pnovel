@@ -63,7 +63,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docker Image
         run: |
-          docker build --tag ghcr.io/$GITHUB_ACTOR/pnovel:latest \
+          docker build --tag ghcr.io/$GITHUB_ACTOR/pnovel:${{ github.ref_name }} \
           .
       - name: Push Docker Image
         run: |
