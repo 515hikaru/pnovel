@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Docker Build and Push
+
+jobs:
+  publish_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: | docker build \
+        --tag ghcr.io/$GITHUB_ACTOR/pnovel:latest \
+        --tag ghcr.io/$GITHUB_ACTOR/pnovel:$(echo $GITHUB_SHA | head -c7)
+        .
+      - run: | docker push ghcr.io/$GITHUB_ACTOR/pnovel:latest
+        docker push ghcr.io/$GITHUB_ACTOR/pnovel:$(echo $GITHUB_SHA | head -c7)
