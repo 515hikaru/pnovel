@@ -49,3 +49,22 @@ jobs:
           body: Release Pnovel Package
           draft: false
           prerelease: false
+
+  publish_docker_image:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Docker Image
+        run: |
+          docker build --tag ghcr.io/$GITHUB_ACTOR/pnovel:latest \
+          .
+      - name: Push Docker Image
+        run: |
+          docker push ghcr.io/$GITHUB_ACTOR/pnovel:${{ github.ref }}
