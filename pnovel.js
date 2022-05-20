@@ -56,7 +56,7 @@ sentence = content:content+ _ blank? {
   return {type: "sentence", contents: content}
 }
 
-content = newLineToken / pixivRubyToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
+content = newLineToken / pixivRubyToken / specialToken / rubyToken / rawBlock / rawToken / comment / speakend / thinkend / text
 
 text = _ text:contentChars _ blank? {
   return {type: "text", contents: text}
@@ -68,6 +68,11 @@ comment = _ "%" _ text:[^\n]* _ blank {
 rawToken = "`" text:[^\n"`"]+ "`" _ blank? {
   return {type: "raw", contents: text.join("")}
 }
+
+rubyToken = "|" kanji:[^<]+ "<" ruby:[^>]+ ">"_ {
+  return "[[rb:" + kanji.join("") + " > " + ruby.join("") + "]]"
+}
+
 
 rawBlock = _ "```" blank? text:([^"`"]+ blank?)+ _ blank? _ "```" blank? {
   const lines = []
