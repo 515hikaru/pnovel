@@ -63,7 +63,7 @@ export class PixivNovelTransformer {
 
   transform(): string {
     const { type, contents } = this.document
-      switch (type) {
+    switch (type) {
       case "doc": {
         const results: string[] = []
         contents.forEach((element) => {
