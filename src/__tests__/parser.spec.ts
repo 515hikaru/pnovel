@@ -382,8 +382,8 @@ boo
               type: "text",
               contents: "、こんにちは",
             },
-          ]
-        }
+          ],
+        },
       ],
     }
     expect(parse(input)).toStrictEqual(expected)
