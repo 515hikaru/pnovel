@@ -1,6 +1,7 @@
-interface DocumentToken {
+export interface DocumentToken {
   type: string
   contents: string
+  yomi?: string
 }
 
 export interface DocumentBlock {
@@ -18,8 +19,8 @@ export function excludeCommentNode(node: DocumentBlock): DocumentBlock {
   const { type, contents } = node
   const newContents: DocumentToken[] = []
   contents.forEach((element) => {
-    const { type, contents } = element
-    if (type !== "comment") newContents.push({ type, contents })
+    const { type, contents, yomi } = element
+    if (type !== "comment") newContents.push({ type, contents, yomi })
   })
   if (newContents.length === 0) return { type: "sentence", contents: [] }
   if (type !== "sentence") return { type: type, contents: newContents }
@@ -36,18 +37,4 @@ function trimFirstSymbol(tokens: DocumentToken[]): DocumentToken[] {
   const head = tokens[0]
   head.contents = head.contents.slice(1)
   return tokens
-}
-
-export function parseDocumentToken(node: DocumentToken): string {
-  const { type, contents } = node
-  switch (type) {
-    case "speechend": {
-      return contents + "」"
-    }
-    case "thinkend": {
-      return contents + "）"
-    }
-    default:
-      return contents
-  }
 }

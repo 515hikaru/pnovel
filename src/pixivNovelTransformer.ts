@@ -1,5 +1,5 @@
-import type { DocumentBlock, Document } from "./eval"
-import { excludeCommentNode, parseDocumentToken } from "./eval"
+import type { DocumentBlock, DocumentToken, Document } from "./eval"
+import { excludeCommentNode } from "./eval"
 
 export class PixivNovelTransformer {
   document: Document
@@ -12,7 +12,7 @@ export class PixivNovelTransformer {
     const { type, contents } = node
     const results: string[] = []
     contents.forEach((element) => {
-      results.push(parseDocumentToken(element))
+      results.push(this.parseDocumentToken(element))
     })
     switch (type) {
       case "sentence": {
@@ -42,6 +42,24 @@ export class PixivNovelTransformer {
       }
     }
   }
+
+  parseDocumentToken(node: DocumentToken): string {
+    const { type, contents } = node
+    switch (type) {
+      case "speechend": {
+        return contents + "」"
+      }
+      case "thinkend": {
+        return contents + "）"
+      }
+      case "ruby": {
+        return `[[rb:${contents} > ${node.yomi}]]`
+      }
+      default:
+        return contents
+    }
+  }
+  
 
   transform(): string {
     const { type, contents } = this.document

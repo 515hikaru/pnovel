@@ -1,5 +1,5 @@
-import type { DocumentBlock, Document } from "./eval"
-import { excludeCommentNode, parseDocumentToken } from "./eval"
+import type { DocumentBlock, DocumentToken, Document } from "./eval"
+import { excludeCommentNode } from "./eval"
 
 export class NarouSyosetsuTransformer {
   document: Document
@@ -12,7 +12,7 @@ export class NarouSyosetsuTransformer {
     const { type, contents } = node
     const results: string[] = []
     contents.forEach((element) => {
-      results.push(parseDocumentToken(element))
+      results.push(this.parseDocumentToken(element))
     })
     switch (type) {
       case "sentence": {
@@ -40,6 +40,23 @@ export class NarouSyosetsuTransformer {
       default: {
         return results.join("")
       }
+    }
+  }
+
+  parseDocumentToken(node: DocumentToken): string {
+    const { type, contents } = node
+    switch (type) {
+      case "speechend": {
+        return contents + "」"
+      }
+      case "thinkend": {
+        return contents + "）"
+      }
+      case "ruby": {
+        return `|${contents}《${node.yomi}》`
+      }
+      default:
+        return contents
     }
   }
 

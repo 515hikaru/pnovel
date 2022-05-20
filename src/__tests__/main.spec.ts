@@ -134,9 +134,23 @@ def
     expect(result).toBe(expected)
   })
 
+  test("pixiv ruby", () => {
+    const text = "こんにちは、|こんにちは< こんにちは>、こんにちは"
+    const expected = "　こんにちは、[[rb:こんにちは > こんにちは]]、こんにちは\n"
+    const result = transform(text, "pixiv")
+    expect(result).toBe(expected)
+  })
+
   test("narou toransformer", () => {
     const text = "# foo\n"
     const expected = "\nｆｏｏ\n\n"
+    const result = transform(text, "narou")
+    expect(result).toBe(expected)
+  })
+
+  test("narou ruby", () => {
+    const text = "こんにちは、|こんにちは<こんにちは>、こんにちは"
+    const expected = "　こんにちは、|こんにちは《こんにちは》、こんにちは\n"
     const result = transform(text, "narou")
     expect(result).toBe(expected)
   })
@@ -148,7 +162,7 @@ def
     expect(result).toBe(expected)
   })
 
-  test("narou toransformer dpcument", () => {
+  test("narou transformer document", () => {
     const text = `abc
 def
 
