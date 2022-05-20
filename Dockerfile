@@ -11,7 +11,7 @@ RUN npm ci && \
     npm run build
 
 FROM node:16.15.0-alpine3.15
-ENV VERSION 0.6.11
+ENV VERSION 0.7.0
 RUN mkdir -p /app/dist
 RUN mkdir -p /app/bin
 COPY --from=node /app/dist/main.js /app/dist/main.js
