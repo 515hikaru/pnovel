@@ -107,6 +107,8 @@ boo
 あいうえお
 
 #
+
+こんにちは、|こんにちは< ・・・・・>、こんにちは
 `
     const expected = {
       type: "doc",
@@ -360,6 +362,28 @@ boo
             },
           ],
         },
+        {
+          type: "break",
+          contents: [],
+        },
+        {
+          type: "sentence",
+          contents: [
+            {
+              type: "text",
+              contents: "こんにちは、",
+            },
+            {
+              type: "ruby",
+              contents: "こんにちは",
+              yomi: "・・・・・",
+            },
+            {
+              type: "text",
+              contents: "、こんにちは",
+            },
+          ]
+        }
       ],
     }
     expect(parse(input)).toStrictEqual(expected)

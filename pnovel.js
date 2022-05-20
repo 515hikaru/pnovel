@@ -56,7 +56,7 @@ sentence = content:content+ _ blank? {
   return {type: "sentence", contents: content}
 }
 
-content = newLineToken / pixivRubyToken / specialToken / rubyToken / rawBlock / rawToken / comment / speakend / thinkend / text
+content = newLineToken / pixivRubyToken / rubyToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
 
 text = _ text:contentChars _ blank? {
   return {type: "text", contents: text}
@@ -69,10 +69,9 @@ rawToken = "`" text:[^\n"`"]+ "`" _ blank? {
   return {type: "raw", contents: text.join("")}
 }
 
-rubyToken = "|" kanji:[^<]+ "<" ruby:[^>]+ ">"_ {
-  return "[[rb:" + kanji.join("") + " > " + ruby.join("") + "]]"
+rubyToken = _ "|" _ kanji:[^<]+ _ "<" _ ruby:[^>]+ _ ">" _ blank? {
+  return {type: "ruby", contents: kanji.join(""), yomi: ruby.join("")}
 }
-
 
 rawBlock = _ "```" blank? text:([^"`"]+ blank?)+ _ blank? _ "```" blank? {
   const lines = []
@@ -106,7 +105,7 @@ thinkend = _ texts:(speechChars _ specialSymbol?)+ "）" _ blank? {
 
 
 char = [^「」（）\[\]!?！？`%#\n]
-contentChar = [^\[\]!?！？`%#\n]
+contentChar = [^\[\]!?！？`|%#\n]
 
 useChar = whitespace / endOfSpecialSymbol / specialSymbol / hankakuEisu / char
 useContentChar = whitespace / endOfSpecialSymbol / specialSymbol / hankakuEisu / contentChar
