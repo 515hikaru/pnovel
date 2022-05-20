@@ -1,4 +1,4 @@
-FROM node:12.16.3 as node
+FROM node:16.15.0 as node
 
 
 RUN mkdir -p /app
@@ -10,7 +10,7 @@ RUN npm ci && \
     npm run generate && \
     npm run build
 
-FROM node:12.16.3-alpine3.11
+FROM node:16.15.0-alpine3.15
 ENV VERSION 0.6.11
 RUN mkdir -p /app/dist
 RUN mkdir -p /app/bin
