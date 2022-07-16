@@ -7,7 +7,7 @@ import { transform, main } from "../main"
 
 describe("test main", () => {
   test("main", () => {
-    mockArgv(["testdata/sample.pnovel", "-o", "output.txt"], () => {
+    mockArgv(["testdata/sample.pnovel", "-o", "output.txt"], async () => {
       main()
     })
     const filePath = path.resolve("output.txt")
