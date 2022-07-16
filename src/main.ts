@@ -34,14 +34,14 @@ function initProgram() {
     .option("-m, --mode <type>", "Format of novel", "pixiv")
     .parse(process.argv)
 
-  if (!["pixiv", "narou"].includes(program.mode)) {
-    throw new Error(`No such mode: ${program.mode}`)
+    if (!["pixiv", "narou"].includes(program.opts().mode)) {
+    throw new Error(`No such mode: ${program.opts().mode}`)
   }
 }
 
 function lookUpFile(): string {
   // look up the file path
-  if (program.stdin) return ""
+  if (program.opts().stdin) return ""
   if (program.args.length === 0) {
     const error = new Error(`pnovel needs a file path.
 $ pnovel <file path>
@@ -59,7 +59,7 @@ $ pnovel <file path>
 }
 
 function readFile(file: string) {
-  if (program.stdin) return fs.readFileSync(stdin.fd, "utf-8")
+  if (program.opts().stdin) return fs.readFileSync(stdin.fd, "utf-8")
   const filePath = path.resolve(file)
   return fs.readFileSync(filePath, "utf-8")
 }
@@ -88,7 +88,7 @@ function addLastEmptyLine(content: string) {
 export function transform(content: string, mode: Mode): string {
   content = addLastEmptyLine(content)
   const jsonContent = parse(content)
-  if (program.debug) console.debug(JSON.stringify(jsonContent))
+  if (program.opts().debug) console.debug(JSON.stringify(jsonContent))
   let transformer
   switch (mode) {
     case "pixiv":
@@ -110,6 +110,7 @@ export function main(): void {
     } else {
       console.error(e)
     }
+    process.exit(1)
   }
   let file = ""
   try {
@@ -124,9 +125,9 @@ export function main(): void {
   }
 
   const fileContent = readFile(file)
-  const transformedContent = transform(fileContent, program.mode)
-  if (program.output) {
-    writeFile(program.output, transformedContent)
+  const transformedContent = transform(fileContent, program.opts().mode)
+  if (program.opts().output) {
+    writeFile(program.opts().output, transformedContent)
     return
   }
   console.log(transformedContent)
