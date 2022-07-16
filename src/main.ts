@@ -13,10 +13,17 @@ const VERSION = "v0.7.0"
 
 type Mode = "pixiv" | "narou"
 
+type CommandField = {
+  debug: any
+  stdin: any
+  output: string
+  mode: Mode
+}
+
 // https://stackoverflow.com/questions/42056246/node-js-process-stdin-issues-with-typescript-tty-readstream-vs-readablestream
 const stdin: any = process.stdin
 
-const program = new Command()
+const program = new Command() as Command & CommandField
 
 function initProgram() {
   program
@@ -63,7 +70,7 @@ function writeFile(outputPath: string, content: string) {
     fs.writeFileSync(outputPath, content)
   } catch (e: unknown) {
     if (e instanceof Error) {
-    console.error(e.message)
+      console.error(e.message)
     } else {
       console.error(e)
     }
