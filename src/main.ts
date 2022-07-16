@@ -92,15 +92,22 @@ export function transform(content: string, mode: Mode): string {
 export function main(): void {
   try {
     initProgram()
-  } catch (e) {
-    console.error(e.message)
-    process.exit(1)
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.error(e.message)
+    } else {
+      console.error(e)
+    }
   }
   let file = ""
   try {
     file = lookUpFile()
-  } catch (e) {
-    console.error(e.message)
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.error(e.message)
+    } else {
+      console.error(e)
+    }
     process.exit(1)
   }
 
