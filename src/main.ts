@@ -61,8 +61,13 @@ function writeFile(outputPath: string, content: string) {
   content = addLastEmptyLine(content)
   try {
     fs.writeFileSync(outputPath, content)
-  } catch (e) {
+  } catch (e: unknown) {
+    if (e instanceof Error) {
     console.error(e.message)
+    } else {
+      console.error(e)
+    }
+    process.exit(1)
   }
 }
 
