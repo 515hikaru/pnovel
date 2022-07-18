@@ -29,7 +29,6 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "codecov": "^3.8.2",
     "eslint": "^8.19.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
