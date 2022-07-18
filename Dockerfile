@@ -10,7 +10,7 @@ RUN npm ci && \
     npm run generate && \
     npm run build
 
-FROM node:18.6.0
+FROM node:18.6-alpine
 ENV VERSION 0.7.0
 RUN mkdir -p /app/dist
 RUN mkdir -p /app/bin
