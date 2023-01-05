@@ -11,7 +11,7 @@ RUN npm ci && \
     npm run build
 
 FROM node:18.6-alpine
-ENV VERSION 0.7.4
+ENV VERSION 0.7.5
 RUN mkdir -p /app/dist
 RUN mkdir -p /app/bin
 COPY --from=node /app/dist/main.js /app/dist/main.js
