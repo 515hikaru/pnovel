@@ -7,7 +7,7 @@ describe("test main", () => {
   test("main", () => {
     const oldArgv = process.argv
     try {
-      process.argv = [...oldArgv, "testdata/sample.pnovel", "-o", "output.txt"]
+      process.argv = [...oldArgv.slice(0, 2), "testdata/sample.pnovel", "-o", "output.txt"]
       main()
     } finally {
       process.argv = oldArgv
