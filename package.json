@@ -27,7 +27,7 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^6.5.0",
     "eslint": "^8.48.0",
     "eslint-config-standard": "^17.1.0",
