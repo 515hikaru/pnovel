@@ -24,4 +24,5 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
   },
   plugins: ["@typescript-eslint", "jest"],
+  ignores: ["pnovel.js", "dist/*.js", "src/__tests__/*"]
 }
