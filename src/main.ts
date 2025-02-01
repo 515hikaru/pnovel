@@ -26,14 +26,14 @@ const stdin: any = process.stdin
 const program = new Command() as Command & CommandField
 
 function initProgram() {
-  program.version(VERSION, '-v, --version', 'Show version information');
+  program.version(VERSION, "-v, --version", "Show version information")
   program
     .option("-d, --debug", "Show a result of parsing")
     .option("-s, --stdin", "Read from standard input")
     .option("-o, --output <file>", "Place the output into <file>")
     .option("-m, --mode <type>", "Format of novel", "pixiv")
     .allowUnknownOption()
-    .argument('[input]', 'input file path')
+    .argument("[input]", "input file path")
     .parse()
 
     if (!["pixiv", "narou"].includes(program.opts().mode)) {
