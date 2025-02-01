@@ -26,13 +26,15 @@ const stdin: any = process.stdin
 const program = new Command() as Command & CommandField
 
 function initProgram() {
+  program.version(VERSION, '-v, --version', 'バージョン情報を表示');
   program
-    .version(VERSION)
     .option("-d, --debug", "Show a result of parsing")
     .option("-s, --stdin", "Read from standard input")
     .option("-o, --output <file>", "Place the output into <file>")
     .option("-m, --mode <type>", "Format of novel", "pixiv")
-    .parse(process.argv)
+    .allowUnknownOption()
+    .argument('[input]', 'input file path')
+    .parse()
 
     if (!["pixiv", "narou"].includes(program.opts().mode)) {
     throw new Error(`No such mode: ${program.opts().mode}`)
@@ -112,6 +114,9 @@ export function main(): void {
     }
     process.exit(1)
   }
+  // program.action((args, options) => {
+
+  // })
   let file = ""
   try {
     file = lookUpFile()
@@ -133,4 +138,4 @@ export function main(): void {
   console.log(transformedContent)
 }
 
-exports.main = main
+export default main
