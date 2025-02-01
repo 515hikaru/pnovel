@@ -9,7 +9,6 @@
   "dependencies": {
     "@types/jest": "^29.5.14",
     "commander": "^13.1.0",
-    "pegjs": "^0.10.0",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3"
   },
