@@ -26,7 +26,7 @@ const stdin: any = process.stdin
 const program = new Command() as Command & CommandField
 
 function initProgram() {
-  program.version(VERSION, '-v, --version', 'バージョン情報を表示');
+  program.version(VERSION, '-v, --version', 'Show version information');
   program
     .option("-d, --debug", "Show a result of parsing")
     .option("-s, --stdin", "Read from standard input")
@@ -114,9 +114,6 @@ export function main(): void {
     }
     process.exit(1)
   }
-  // program.action((args, options) => {
-
-  // })
   let file = ""
   try {
     file = lookUpFile()
@@ -137,5 +134,3 @@ export function main(): void {
   }
   console.log(transformedContent)
 }
-
-export default main

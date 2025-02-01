@@ -12,9 +12,10 @@ export default {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    module: true, // ESM出力を有効化
+    module: true,
     chunkFormat: 'module',
-    environment: { module: true }
+    environment: { module: true },
+    library: { type: 'module' }
   },
   module: {
     rules: [
@@ -44,4 +45,7 @@ export default {
         'path': 'node:path'
       },
   ],
+  optimization: {
+    minimize: true,
+  },
 };

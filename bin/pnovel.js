@@ -1,3 +1,4 @@
 #!/usr/bin/env node
-const main = require('../dist/main.js')
-main.main()
+import { main } from '../dist/main.js';
+
+main();

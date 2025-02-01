@@ -17,8 +17,13 @@
   "imports": {
     "#parser": "./parser/parser.js"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/main.js"
+    }
+  },
   "bin": {
-    "pnovel": "./bin/pnovel.cjs"
+    "pnovel": "./bin/pnovel.js"
   },
   "scripts": {
     "generate": "peggy -o parser/parser.js --format es pnovel.peggy",
