@@ -1,5 +1,5 @@
-import type { DocumentBlock, DocumentToken, Document } from "./eval"
-import { excludeCommentNode } from "./eval"
+import type { DocumentBlock, DocumentToken, Document } from "./eval.ts"
+import { excludeCommentNode } from "./eval.ts"
 
 export class PixivNovelTransformer {
   document: Document

@@ -6,8 +6,8 @@ import { Command } from "commander"
 
 // @ts-ignore
 import { parse } from "../parser/parser"
-import { PixivNovelTransformer } from "./pixivNovelTransformer"
-import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer"
+import { PixivNovelTransformer } from "./pixivNovelTransformer.ts"
+import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer.ts"
 
 const VERSION = "v0.7.8"
 
