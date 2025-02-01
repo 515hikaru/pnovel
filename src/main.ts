@@ -6,8 +6,8 @@ import { Command } from "commander"
 
 // @ts-ignore
 import { parse } from "../parser/parser"
-import { PixivNovelTransformer } from "./pixivNovelTransformer"
-import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer"
+import { PixivNovelTransformer } from "./pixivNovelTransformer.ts"
+import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer.ts"
 
 const VERSION = "v0.7.8"
 
@@ -26,13 +26,15 @@ const stdin: any = process.stdin
 const program = new Command() as Command & CommandField
 
 function initProgram() {
+  program.version(VERSION, "-v, --version", "Show version information")
   program
-    .version(VERSION)
     .option("-d, --debug", "Show a result of parsing")
     .option("-s, --stdin", "Read from standard input")
     .option("-o, --output <file>", "Place the output into <file>")
     .option("-m, --mode <type>", "Format of novel", "pixiv")
-    .parse(process.argv)
+    .allowUnknownOption()
+    .argument("[input]", "input file path")
+    .parse()
 
     if (!["pixiv", "narou"].includes(program.opts().mode)) {
     throw new Error(`No such mode: ${program.opts().mode}`)
@@ -132,5 +134,3 @@ export function main(): void {
   }
   console.log(transformedContent)
 }
-
-exports.main = main

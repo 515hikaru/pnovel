@@ -1,7 +1,7 @@
 import * as fs from "fs"
 import * as path from "path"
 
-import { transform, main } from "../main"
+import { transform, main } from "../main.ts"
 
 describe("test main", () => {
   test("main", () => {
