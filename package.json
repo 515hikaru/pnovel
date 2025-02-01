@@ -15,17 +15,17 @@
   },
   "type": "module",
   "bin": {
-    "pnovel": "./bin/pnovel.js"
+    "pnovel": "./bin/pnovel.cjs"
   },
   "scripts": {
     "generate": "pegjs -o parser/parser.js pnovel.js",
-    "prepack": "pegjs -o parser/parser.js pnovel.js && webpack --config webpack.config.cjs",
+    "prepack": "pegjs -o parser/parser.js pnovel.js && webpack --config webpack.config.mjs",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src/*.ts src/__tests__/*.spec.ts",
     "fix": "eslint --fix src/*.ts src/__tests__/*.spec.ts",
     "start": "node dist/main.js",
     "test": "npm run generate && jest --coverage",
-    "build": "webpack --config webpack.config.cjs"
+    "build": "webpack --config webpack.config.mjs"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.22.0",
@@ -39,6 +39,7 @@
     "prettier": "^3.4.2",
     "ts-jest": "^29.2.5",
     "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
