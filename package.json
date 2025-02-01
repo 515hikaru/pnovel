@@ -9,21 +9,24 @@
   "dependencies": {
     "@types/jest": "^29.5.14",
     "commander": "^13.1.0",
+    "peggy": "^4.2.0",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3"
   },
   "type": "module",
+  "imports": {
+    "#parser": "./parser/parser.js"
+  },
   "bin": {
     "pnovel": "./bin/pnovel.cjs"
   },
   "scripts": {
-    "generate": "pegjs -o parser/parser.js pnovel.js",
-    "prepack": "pegjs -o parser/parser.js pnovel.js && webpack --config webpack.config.mjs",
+    "generate": "peggy -o parser/parser.js --format es pnovel.peggy",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint src/*.ts src/__tests__/*.spec.ts",
     "fix": "eslint --fix src/*.ts src/__tests__/*.spec.ts",
     "start": "node dist/main.js",
-    "test": "npm run generate && jest --coverage",
+    "test": "npm run generate && NODE_OPTIONS='--experimental-vm-modules' jest --coverage --verbose",
     "build": "webpack --config webpack.config.mjs"
   },
   "devDependencies": {
