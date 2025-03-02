@@ -1,4 +1,4 @@
-FROM node:18.6.0 as node
+FROM node:22.13 as node
 
 
 RUN mkdir -p /app
@@ -10,8 +10,8 @@ RUN npm ci && \
     npm run generate && \
     npm run build
 
-FROM node:18.6-alpine
-ENV VERSION 0.7.8
+FROM node:22.13-alpine
+ENV VERSION 0.7.9
 RUN mkdir -p /app/dist
 RUN mkdir -p /app/bin
 COPY --from=node /app/dist/main.js /app/dist/main.js
