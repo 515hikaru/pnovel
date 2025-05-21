@@ -6,8 +6,6 @@ updates:
       interval: weekly
       time: '00:00'
     open-pull-requests-limit: 10
-    reviewers:
-      - 515hikaru
     assignees:
       - 515hikaru
     commit-message:
@@ -21,8 +19,6 @@ updates:
       interval: weekly
       time: '00:00'
     open-pull-requests-limit: 10
-    reviewers:
-      - 515hikaru
     assignees:
       - 515hikaru
     commit-message:
