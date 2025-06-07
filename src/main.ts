@@ -9,7 +9,7 @@ import { parse } from "../parser/parser"
 import { PixivNovelTransformer } from "./pixivNovelTransformer.ts"
 import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer.ts"
 
-const VERSION = "v0.7.9"
+const VERSION = "v0.7.10"
 
 type Mode = "pixiv" | "narou"
 
