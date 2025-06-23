@@ -33,7 +33,7 @@ doc = block:block+ {
   return { type: "doc", contents: block }
 }
 
-block = blank / header / emptyHeader / speaking / thinking / sentence 
+block = blank / header / emptyHeader / speaking / thinking / sentence
 
 // 見出しは1行
 header = "#" _ content:content+ _ blank? {
@@ -151,4 +151,5 @@ blank = "\n" {
 whitespace "whitespace" = [ 　\t\r] {
   return ''
 }
+
 _ "whitespaces" = whitespace*
