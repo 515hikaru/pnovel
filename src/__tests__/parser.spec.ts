@@ -388,4 +388,22 @@ boo
     }
     expect(parse(input)).toStrictEqual(expected)
   })
+
+  test("parse header with colon", () => {
+    const input = "# 14:30 `\u3000` 田中くん"
+    const expected = {
+      type: "doc",
+      contents: [
+        {
+          type: "header",
+          contents: [
+            { type: "text", contents: "１４：３０" },
+            { type: "raw", contents: "　" },
+            { type: "text", contents: "田中くん" },
+          ],
+        },
+      ],
+    }
+    expect(parse(input)).toStrictEqual(expected)
+  })
 })

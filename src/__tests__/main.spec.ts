@@ -143,6 +143,13 @@ def
     expect(result).toBe(expected)
   })
 
+  test("pixiv header with colon", () => {
+    const text = "# 14:30 `\u3000` 田中くん"
+    const expected = "[chapter:１４：３０　田中くん]\n"
+    const result = transform(text, "pixiv")
+    expect(result).toBe(expected)
+  })
+
   test("narou toransformer", () => {
     const text = "# foo\n"
     const expected = "\nｆｏｏ\n\n"

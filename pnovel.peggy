@@ -33,7 +33,7 @@ doc = block:block+ {
   return { type: "doc", contents: block }
 }
 
-block = blank / header / emptyHeader / speaking / thinking / sentence 
+block = blank / header / emptyHeader / speaking / thinking / sentence
 
 // 見出しは1行
 header = "#" _ content:content+ _ blank? {
@@ -123,7 +123,7 @@ speechChars = text:speechChar+ {
   return text.join("")
 }
 
-hankakuEisu = c:[a-zA-Z0-9] {
+hankakuEisu = c:[a-zA-Z0-9:] {
   return String.fromCharCode(c.charCodeAt(0) + 0xFEE0);
 }
 
@@ -151,4 +151,5 @@ blank = "\n" {
 whitespace "whitespace" = [ 　\t\r] {
   return ''
 }
+
 _ "whitespaces" = whitespace*
