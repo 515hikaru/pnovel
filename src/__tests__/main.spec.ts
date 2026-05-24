@@ -1,6 +1,8 @@
 import * as fs from "fs"
 import * as path from "path"
 
+import { jest } from "@jest/globals"
+
 import { transform, main } from "../main.ts"
 
 describe("test main", () => {
@@ -25,6 +27,19 @@ describe("test parsing", () => {
     const expected = "　ｆｏｏ\n"
     const result = transform(text, "pixiv")
     expect(result).toBe(expected)
+  })
+
+  test("debug parsing", () => {
+    const debug = jest.spyOn(console, "debug").mockImplementation(() => {})
+    try {
+      const text = "foo\n"
+      const expected = "　ｆｏｏ\n"
+      const result = transform(text, "pixiv", true)
+      expect(result).toBe(expected)
+      expect(debug).toHaveBeenCalledTimes(1)
+    } finally {
+      debug.mockRestore()
+    }
   })
 
   test("do not have last newline", () => {

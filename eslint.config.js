@@ -33,4 +33,12 @@ export default [
     },
     ignores: ["pnovel.js", "dist/*.js"],
   },
+  {
+    files: ["src/editor.ts"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
 ]

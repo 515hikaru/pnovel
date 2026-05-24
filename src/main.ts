@@ -4,14 +4,11 @@ import * as process from "process"
 
 import { Command } from "commander"
 
-// @ts-ignore
-import { parse } from "../parser/parser"
-import { PixivNovelTransformer } from "./pixivNovelTransformer.ts"
-import { NarouSyosetsuTransformer } from "./narouSyosetsuTransformer.ts"
+import { transform, type Mode } from "./transform.ts"
+
+export { transform } from "./transform.ts"
 
 const VERSION = "v0.7.9"
-
-type Mode = "pixiv" | "narou"
 
 type CommandField = {
   debug: any
@@ -87,22 +84,6 @@ function addLastEmptyLine(content: string) {
   return content
 }
 
-export function transform(content: string, mode: Mode): string {
-  content = addLastEmptyLine(content)
-  const jsonContent = parse(content)
-  if (program.opts().debug) console.debug(JSON.stringify(jsonContent))
-  let transformer
-  switch (mode) {
-    case "pixiv":
-      transformer = new PixivNovelTransformer(jsonContent)
-      break
-    default:
-      transformer = new NarouSyosetsuTransformer(jsonContent)
-      break
-  }
-  return transformer.transform()
-}
-
 export function main(): void {
   try {
     initProgram()
@@ -127,7 +108,7 @@ export function main(): void {
   }
 
   const fileContent = readFile(file)
-  const transformedContent = transform(fileContent, program.opts().mode)
+  const transformedContent = transform(fileContent, program.opts().mode, program.opts().debug)
   if (program.opts().output) {
     writeFile(program.opts().output, transformedContent)
     return

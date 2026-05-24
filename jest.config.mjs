@@ -22,6 +22,7 @@ export default {
   collectCoverage: true,
   collectCoverageFrom: [
     "**/*.{ts,tsx}",
+    "!**/editor.ts",
     "!**/node_modules/**"
   ],
   coverageReporters: [
