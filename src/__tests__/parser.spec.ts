@@ -388,4 +388,33 @@ boo
     }
     expect(parse(input)).toStrictEqual(expected)
   })
+
+  test("parse ruby tokens in speaking", () => {
+    const input = `「これは|漢字<かんじ>と|言葉<ことば>です」
+「これは|漢字<かんじ>」`
+    const expected = {
+      type: "doc",
+      contents: [
+        {
+          type: "speaking",
+          contents: [
+            { type: "text", contents: "これは" },
+            { type: "ruby", contents: "漢字", yomi: "かんじ" },
+            { type: "text", contents: "と" },
+            { type: "ruby", contents: "言葉", yomi: "ことば" },
+            { type: "speechend", contents: "です" },
+          ],
+        },
+        {
+          type: "speaking",
+          contents: [
+            { type: "text", contents: "これは" },
+            { type: "ruby", contents: "漢字", yomi: "かんじ" },
+            { type: "speechend", contents: "" },
+          ],
+        },
+      ],
+    }
+    expect(parse(input)).toStrictEqual(expected)
+  })
 })

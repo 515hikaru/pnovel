@@ -16,12 +16,9 @@ export class PixivNovelTransformer {
     })
     switch (type) {
       case "sentence": {
-        let text = ""
-        if (["raw", "pixivToken"].includes(contents[0].type)) {
-          text = results.join("")
-        } else {
-          text = "　" + results.join("")
-        }
+        const text = ["raw", "pixivToken"].includes(contents[0].type)
+          ? results.join("")
+          : "　" + results.join("")
         if (text.slice(-1)[0] === "　") return text.slice(0, text.length - 1)
         return text
       }

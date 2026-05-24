@@ -158,6 +158,23 @@ def
     expect(result).toBe(expected)
   })
 
+  test("pixiv ruby in speaking", () => {
+    const text = `「|漢字<かんじ>にルビ」
+「これは|漢字<かんじ>です」
+「これは、|漢字<かんじ>です」
+「|漢字<かんじ>と|言葉<ことば>です」
+「これは|漢字<かんじ>」
+`
+    const expected = `「[[rb:漢字 > かんじ]]にルビ」
+「これは[[rb:漢字 > かんじ]]です」
+「これは、[[rb:漢字 > かんじ]]です」
+「[[rb:漢字 > かんじ]]と[[rb:言葉 > ことば]]です」
+「これは[[rb:漢字 > かんじ]]」
+`
+    const result = transform(text, "pixiv")
+    expect(result).toBe(expected)
+  })
+
   test("narou toransformer", () => {
     const text = "# foo\n"
     const expected = "\nｆｏｏ\n\n"
@@ -168,6 +185,23 @@ def
   test("narou ruby", () => {
     const text = "こんにちは、|こんにちは<こんにちは>、こんにちは"
     const expected = "　こんにちは、|こんにちは《こんにちは》、こんにちは\n"
+    const result = transform(text, "narou")
+    expect(result).toBe(expected)
+  })
+
+  test("narou ruby in speaking", () => {
+    const text = `「|漢字<かんじ>にルビ」
+「これは|漢字<かんじ>です」
+「これは、|漢字<かんじ>です」
+「|漢字<かんじ>と|言葉<ことば>です」
+「これは|漢字<かんじ>」
+`
+    const expected = `「|漢字《かんじ》にルビ」
+「これは|漢字《かんじ》です」
+「これは、|漢字《かんじ》です」
+「|漢字《かんじ》と|言葉《ことば》です」
+「これは|漢字《かんじ》」
+`
     const result = transform(text, "narou")
     expect(result).toBe(expected)
   })

@@ -25,6 +25,18 @@
     return useTexts
   }
 
+  function flattenSymbols(texts) {
+    const useTexts = []
+    texts.forEach((text) => {
+      if (text[2]) {
+        useTexts.push(text[0] + text[2])
+        return
+      }
+      useTexts.push(text[0])
+    })
+    return useTexts
+  }
+
 }
 
 start = doc
@@ -44,11 +56,11 @@ emptyHeader = "#" blank? {
   return {type: "sentence", contents: [{ type: 'text', contents: '#'}]}
 }
 
-speaking = _ "「" _ content:content+  blank? {
+speaking = _ "「" _ content:speechContent+  blank? {
   return {type: "speaking", contents: content}
 }
 
-thinking = _ "（" _ content:content+ blank? {
+thinking = _ "（" _ content:thinkContent+ blank? {
   return { type: "thinking", contents: content}
 }
 
@@ -58,8 +70,17 @@ sentence = content:content+ _ blank? {
 
 content = newLineToken / pixivRubyToken / rubyToken / specialToken / rawBlock / rawToken / comment / speakend / thinkend / text
 
+speechContent = newLineToken / pixivRubyToken / rubyToken / specialToken / rawBlock / rawToken / comment / speakend / speakclose / speechText
+
+thinkContent = newLineToken / pixivRubyToken / rubyToken / specialToken / rawBlock / rawToken / comment / thinkend / thinkclose / speechText
+
 text = _ text:contentChars _ blank? {
   return {type: "text", contents: text}
+}
+
+speechText = _ texts:(speechChars _ specialSymbol?)+ _ blank? {
+  const useTexts = flattenSymbols(texts)
+  return {type: "text", contents: useTexts.join("")}
 }
 comment = _ "%" _ text:[^\n]* _ blank {
   return {type: "comment", contents: text.join("")}
@@ -103,8 +124,16 @@ thinkend = _ texts:(speechChars _ specialSymbol?)+ "）" _ blank? {
   return {type: "thinkend", contents: useTexts.join("") }
 }
 
+speakclose = _ "」" _ blank? {
+  return {type: "speechend", contents: "" }
+}
 
-char = [^「」（）\[\]!?！？`%#\n]
+thinkclose = _ "）" _ blank? {
+  return {type: "thinkend", contents: "" }
+}
+
+
+char = [^「」（）\[\]!?！？`|%#\n]
 contentChar = [^\[\]!?！？`|%#\n]
 
 useChar = whitespace / endOfSpecialSymbol / specialSymbol / hankakuEisu / char
