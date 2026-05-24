@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>pnovel editor</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="editor-shell">
+      <header class="topbar">
+        <div>
+          <h1>pnovel editor</h1>
+          <p>Raw text to transformed preview</p>
+        </div>
+        <div class="toolbar" aria-label="Editor controls">
+          <label class="mode-control">
+            <span>Mode</span>
+            <select id="mode-select">
+              <option value="pixiv">Pixiv</option>
+              <option value="narou">Narou</option>
+            </select>
+          </label>
+          <button id="copy-button" type="button">Copy</button>
+          <button id="clear-button" type="button">Clear</button>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="pnovel editor">
+        <section class="pane" aria-labelledby="raw-heading">
+          <div class="pane-heading">
+            <h2 id="raw-heading">Raw</h2>
+          </div>
+          <textarea id="raw-input" spellcheck="false" aria-label="Raw pnovel text"></textarea>
+        </section>
+
+        <section class="pane" aria-labelledby="preview-heading">
+          <div class="pane-heading">
+            <h2 id="preview-heading">Preview</h2>
+            <p id="error-message" role="alert"></p>
+          </div>
+          <pre id="preview-output" aria-label="Transformed preview"></pre>
+        </section>
+      </section>
+    </main>
+    <script defer src="../dist/editor.js"></script>
+  </body>
+</html>
